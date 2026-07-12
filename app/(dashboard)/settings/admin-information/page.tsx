@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
-import { Upload, Trash2, Pencil, User, Mail, Shield } from 'lucide-react';
+import { Upload, Trash2, Pencil, User, Mail, Shield, Phone, MapPin, Calendar, BadgeCheck } from 'lucide-react';
+import GenericInput from '@/components/common/generic-input/GenericInput';
 
 export default function AdminInformationPage() {
   const [isEditing, setIsEditing] = useState(false);
@@ -99,51 +100,68 @@ export default function AdminInformationPage() {
 
         <div className='flex-1 space-y-5'>
           <div className='grid gap-5'>
-            <InputField 
-              icon={<User className='w-4 h-4' />}
-              label="Full Name" 
-              name="name" 
-              value={formData.name} 
-              onChange={handleInputChange} 
-              disabled={!isEditing} 
+            <GenericInput
+              label="Full Name"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              disabled={!isEditing}
+              prefix={<User className='w-4 h-4 text-slate-500' />}
+              size="sm"
             />
-            <InputField 
-              icon={<Mail className='w-4 h-4' />}
-              label="Email Address" 
-              name="email" 
-              value={formData.email} 
-              onChange={handleInputChange} 
-              disabled={!isEditing} 
+            <GenericInput
+              label="Email Address"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              disabled={!isEditing}
+              prefix={<Mail className='w-4 h-4 text-slate-500' />}
+              size="sm"
             />
-            <InputField 
-              icon={<Shield className='w-4 h-4' />}
-              label="Account Type" 
-              name="accountType" 
-              value={formData.accountType} 
-              onChange={handleInputChange} 
-              disabled={true} 
+            <GenericInput
+              label="Account Type"
+              name="accountType"
+              value={formData.accountType}
+              disabled={true}
+              prefix={<Shield className='w-4 h-4 text-slate-500' />}
+              size="sm"
+            />
+            <GenericInput
+              label="Phone Number"
+              name="phone"
+              value="+1 (555) 123-4567"
+              disabled={true}
+              prefix={<Phone className='w-4 h-4 text-slate-500' />}
+              size="sm"
+            />
+            <GenericInput
+              label="Location"
+              name="location"
+              value="New York, USA"
+              disabled={true}
+              prefix={<MapPin className='w-4 h-4 text-slate-500' />}
+              size="sm"
+            />
+            <GenericInput
+              label="Joined Date"
+              name="joinedDate"
+              value="January 15, 2024"
+              disabled={true}
+              prefix={<Calendar className='w-4 h-4 text-slate-500' />}
+              size="sm"
+            />
+            <GenericInput
+              label="Status"
+              name="status"
+              value="Active"
+              disabled={true}
+              prefix={<BadgeCheck className='w-4 h-4 text-slate-500' />}
+              size="sm"
             />
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function InputField({ label, name, value, onChange, disabled, icon }: any) {
-  return (
-    <div>
-      <label className="mb-2 flex items-center gap-2 text-[#697586] text-sm font-medium">
-        {icon}
-        {label}
-      </label>
-      <input
-        name={name}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-        className="h-12 w-full rounded-xl border border-purple-100 bg-purple-50/30 px-4 text-sm text-[#161618] outline-none focus:border-[#7C3AED] focus:ring-2 focus:ring-purple-100 disabled:cursor-not-allowed transition-all"
-      />
     </div>
   );
 }
