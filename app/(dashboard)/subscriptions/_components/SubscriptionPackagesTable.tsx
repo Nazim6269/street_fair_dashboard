@@ -1,14 +1,11 @@
 "use client";
 
 import ActionIcons from "@/components/icons/ActionIcons";
-import EmptyState from "@/components/reusable/EmptyState";
 import DataTable, { Column } from "@/components/reusable/table/DataTable";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { BadgeCheck, BanIcon, CircleX, ClockIcon, Pencil, TicketIcon, XIcon } from "lucide-react";
-import { LoadingBoundaryProvider } from "next/dist/client/components/layout-router";
-import Link from "next/link";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 
 // 1. Updated Vendor type to match the data needed for badges
 type SubscriptionPackage = {
@@ -108,33 +105,40 @@ const data: SubscriptionPackage[] = [
     },
   ];
 export default function VendorAccountTable() {
+    const [statusFilter, setStatusFilter] = useState("all");
+    const [sortBy, setSortBy] = useState("newest");
+
     return (
         <div className="bg-white rounded-2xl border border-[#ECEFF3]">
             <div className="p-6 flex justify-between items-center border-b border-[#ECEFF3]">
                 <h2 className="text-xl font-semibold">Vendor Accounts</h2>
                 <div className="flex items-center gap-6">
-                    <div className="flex items-center  ">
+                    <div className="flex items-center gap-2">
                         <span className="text-sm text-[#697586]">Status:</span>
-                        <select className="text-sm font-semibold p-1 outline-none rounded-lg text-center">
-                            <option className="" value="all">All</option>
-                            {/* <option value="verified">Verified</option>
-                            <option value="suspended">Suspended</option>
-                            <option value="expired">Expired</option>
-                            <option value="inactive">Inactive</option> */}
-
-                        </select>
+                        <GenericDropDown
+                            options={[{ label: "All", value: "all" }]}
+                            value={statusFilter}
+                            onValueChange={(value) => setStatusFilter(value.toString())}
+                            variant="light"
+                            size="sm"
+                            radius="sm"
+                        />
                     </div>
-
 
                     <div className="flex items-center gap-2">
                         <span className="text-sm text-[#697586]">Sort by:</span>
-                        <select className="text-sm font-semibold p-1 outline-none">
-                            <option>Newest First</option>
-                        </select>
+                        <GenericDropDown
+                            options={[{ label: "Newest First", value: "newest" }]}
+                            value={sortBy}
+                            onValueChange={(value) => setSortBy(value.toString())}
+                            variant="light"
+                            size="sm"
+                            radius="sm"
+                        />
                     </div>
                 </div>
             </div>
-            <DataTable columns={getColumns()} data={data} />
+            <DataTable columns={getColumns()} data={data} emptyMessage="No subscription packages found." />
         </div>
     );
 }

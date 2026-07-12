@@ -2,11 +2,14 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ReusableSelect } from "@/components/form/CustomSelect";
 import GenericInput from "@/components/common/generic-input/GenericInput";
 import GenericButton from "@/components/common/generic-button/GenericButton";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 
 export default function CreateSubscriptionPlan() {
+  const [currency, setCurrency] = useState("");
+  const [billingPeriod, setBillingPeriod] = useState("");
+
   return (
     <div className="w-full space-y-7">
 
@@ -46,14 +49,44 @@ export default function CreateSubscriptionPlan() {
               <label className="mb-2 block text-sm font-medium text-[#697586]">
                 Currency
               </label>
-              <ReusableSelect className="flex h-[54px] w-full items-center justify-between rounded-xl border border-purple-200 bg-[#F8FAFC] px-5 text-sm text-[#A0AEC0] focus:border-[#7C3AED] focus:ring-2 focus:ring-purple-100 transition" placeholder="Select Currency" options={[{ value: "USD", label: "USD" }, { value: "EUR", label: "EUR" }, { value: "GBP", label: "GBP" }, { value: "JPY", label: "JPY" }, { value: "AUD", label: "AUD" }, { value: "CAD", label: "CAD" }, { value: "CHF", label: "CHF" }, { value: "CNY", label: "CNY" }, { value: "SEK", label: "SEK" }, { value: "NZD", label: "NZD" }]} onValueChange={() => { }} />
+              <GenericDropDown
+                options={[
+                  { value: "USD", label: "USD" },
+                  { value: "EUR", label: "EUR" },
+                  { value: "GBP", label: "GBP" },
+                  { value: "JPY", label: "JPY" },
+                  { value: "AUD", label: "AUD" },
+                  { value: "CAD", label: "CAD" },
+                  { value: "CHF", label: "CHF" },
+                  { value: "CNY", label: "CNY" },
+                  { value: "SEK", label: "SEK" },
+                  { value: "NZD", label: "NZD" },
+                ]}
+                value={currency}
+                onValueChange={(value) => setCurrency(value.toString())}
+                placeholder="Select Currency"
+                variant="light"
+                size="md"
+                radius="md"
+              />
             </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[#697586]">
                 Billing Period
               </label>
-              <ReusableSelect className="flex h-[54px] w-full items-center justify-between rounded-xl border border-purple-200 bg-[#F8FAFC] px-5 text-sm text-[#A0AEC0] focus:border-[#7C3AED] focus:ring-2 focus:ring-purple-100 transition" placeholder="Select Billing Period" options={[{ value: "Monthly", label: "Monthly" }, { value: "Yearly", label: "Yearly" }]} onValueChange={() => { }} />
+              <GenericDropDown
+                options={[
+                  { value: "Monthly", label: "Monthly" },
+                  { value: "Yearly", label: "Yearly" },
+                ]}
+                value={billingPeriod}
+                onValueChange={(value) => setBillingPeriod(value.toString())}
+                placeholder="Select Billing Period"
+                variant="light"
+                size="md"
+                radius="md"
+              />
             </div>
 
           </div>
