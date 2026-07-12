@@ -58,14 +58,14 @@ export default function PlatformGrowthChart() {
 
           <div className="mt-5 flex items-center gap-3 text-lg text-[#667085]">
             <div className="flex items-center gap-2">
-              <span className="h-4 w-4 rounded-full bg-[#3FC4C6]" />
+              <span className="h-4 w-4 rounded-full bg-[#7C3AED]" />
               <span className="text-[#344054]">Vendor</span>
             </div>
 
             <span>vs</span>
 
             <div className="flex items-center gap-2">
-              <span className="h-4 w-4 rounded-full bg-[#F6A316]" />
+              <span className="h-4 w-4 rounded-full bg-[#C4B5FD]" />
               <span>Customer</span>
             </div>
 
@@ -122,20 +122,20 @@ export default function PlatformGrowthChart() {
             <Tooltip
               content={<CustomTooltip payload={[]} />}
               cursor={{
-                fill: "rgba(250, 244, 230, 0.7)",
+                fill: "rgba(124,58,237,0.08)",
                 radius: 16,
               }}
             />
 
             <Bar
               dataKey="Customer"
-              fill="#F6A316"
+              fill="#C4B5FD"
               radius={[999, 999, 0, 0]}
             />
 
             <Bar
               dataKey="Vendor"
-              fill="#3FC4C6"
+              fill="#7C3AED"
               radius={[999, 999, 0, 0]}
             />
           </BarChart>

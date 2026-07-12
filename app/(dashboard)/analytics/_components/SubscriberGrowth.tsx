@@ -48,10 +48,10 @@ export default function SubscriberGrowth() {
                             itemSorter={null}
                             // formatter={(value) => String(value).toLowerCase()}
                         />
-                        <Bar dataKey="Free" stackId="a" fill="#F4AE2B" radius={[0, 0, 0, 0]} />
-                        <Bar dataKey="Starter" stackId="a" fill="#F6C553" radius={[0, 0, 0, 0]} />
-                        <Bar dataKey="Pro" stackId="a" fill="#F9DD8E" radius={[0, 0, 0, 0]} />
-                        <Bar dataKey="Elite" stackId="a" fill="#FCEFC9" radius={[6, 6, 0, 0]} />
+                        <Bar dataKey="Free" stackId="a" fill="#4C1D95" radius={[0, 0, 0, 0]} />
+                        <Bar dataKey="Starter" stackId="a" fill="#6D28D9" radius={[0, 0, 0, 0]} />
+                        <Bar dataKey="Pro" stackId="a" fill="#7C3AED" radius={[0, 0, 0, 0]} />
+                        <Bar dataKey="Elite" stackId="a" fill="#A78BFA" radius={[6, 6, 0, 0]} />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

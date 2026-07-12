@@ -41,7 +41,7 @@ export default function RevenueChart() {
             <button 
               key={tab}
               className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                tab === 'Annually' ? 'bg-[#F59E0B] text-white shadow-sm' : 'text-[#697586]'
+                tab === 'Annually' ? 'bg-[#7C3AED] text-white shadow-sm' : 'text-[#697586]'
               }`}
             >
               {tab}
@@ -56,8 +56,8 @@ export default function RevenueChart() {
           <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#3AC2C2" stopOpacity={0.2}/>
-                <stop offset="95%" stopColor="#3AC2C2" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#7C3AED" stopOpacity={0.2}/>
+                <stop offset="95%" stopColor="#7C3AED" stopOpacity={0}/>
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F3F4F6" />
@@ -67,7 +67,7 @@ export default function RevenueChart() {
             <Area 
               type="monotone" 
               dataKey="value" 
-              stroke="#3AC2C2" 
+              stroke="#7C3AED" 
               strokeWidth={3}
               fillOpacity={1} 
               fill="url(#colorValue)" 

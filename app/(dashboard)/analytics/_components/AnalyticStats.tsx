@@ -13,28 +13,28 @@ export default function AnalyticStats() {
             <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
 
                 <StatsCard
-                    color='#3AC2C2'
+                    color='#7C3AED'
                     title='Total Vendors Registered                      '
                     value={1240}
                     update='May 22, 2026'
                     icon={<VendorStatsIcons.TotalVendors />}
                 />
                 <StatsCard
-                    color='  #FFBB1C'
+                    color='#4C1D95'
                     title='Total Customers Registered'
                     value={1220}
                     update='May 22, 2026'
                     icon={<VendorStatsIcons.VerifiedVendors />}
                 />
                 <StatsCard
-                    color='#89A2C3'
+                    color='#6D28D9'
                     title='Total Subscribers'
                     value={17}
                     update='May 22, 2026'
                     icon={<VendorStatsIcons.NewVendors />}
                 />
                 <StatsCard
-                    color='#CC1E22'
+                    color='#8B5CF6'
                     title='Platform Revenue'
                     value={2}
                     update='May 22, 2026'

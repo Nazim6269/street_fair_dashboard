@@ -91,7 +91,7 @@ const winners = [
 
 function TopPerformersCard() {
   return (
-    <div className="object-cover overflow-hidden  bg-[#FFF8E8] px-6   h-[340px]">
+    <div className="object-cover overflow-hidden  bg-purple-50 px-6   h-[340px]">
 
 
       <div className="grid grid-cols-3 items-end gap-6 h-full overflow-hidden">
@@ -108,7 +108,7 @@ function TopPerformersCard() {
               {/* Avatar */}
               <div className="relative ">
                 <div
-                  className={`rotate-28  overflow-hidden border-2 border-[#39C5C3] bg-white shadow-sm [clip-path:polygon(25%_5%,75%_5%,100%_50%,75%_95%,25%_95%,0_50%)]  ${
+                  className={`rotate-28  overflow-hidden                   border-2 border-[#7C3AED] bg-white shadow-sm [clip-path:polygon(25%_5%,75%_5%,100%_50%,75%_95%,25%_95%,0_50%)]  ${
                     isFirst ? "h-[100px] w-[100px]" : "h-[80px] w-[80px]"
                   }`}
                 >
@@ -122,11 +122,11 @@ function TopPerformersCard() {
 
                 {/* Rank badge */}
                 <div
-                  className={`absolute left-1/2 flex -translate-x-1/2 items-center justify-center rounded-full text-[#263244] text-sm font-bold font-lora ${
+                  className={`absolute left-1/2 flex -translate-x-1/2 items-center justify-center rounded-full text-white text-sm font-bold font-lora ${
                     isFirst
-                      ? "-bottom-2 h-5 w-5 bg-[#F6A316] "
-                      : "-bottom-3 h-5 w-5 bg-[#43C6C6] "
-                  } ${item.rank === 3 ? "bg-[#9DB4CC]" : ""}`}
+                      ? "-bottom-2 h-5 w-5 bg-[#4C1D95] "
+                      : "-bottom-3 h-5 w-5 bg-[#7C3AED] "
+                  } ${item.rank === 3 ? "bg-[#8B5CF6]" : ""}`}
                 >
                   {item.rank}
                 </div>
@@ -141,11 +141,11 @@ function TopPerformersCard() {
 
               {/* Score Box */}
               <div
-                className={`mt-4 flex flex-col items-center justify-center rounded-t-[13px]  bg-[#FFDEA0] px-6 ${
+                className={`mt-4 flex flex-col items-center justify-center rounded-t-[13px]  bg-[#DDD6FE] px-6 ${
                   isFirst ? "h-[135px] w-[80px]" : "h-[106px] w-[70px]"
                 }`}
               >
-                <p className="m-0 text-lg font-bold font-lora text-[#744C12]">
+                <p className="m-0 text-lg font-bold font-lora text-[#4C1D95]">
                   {item.orders}
                 </p>
               </div>
