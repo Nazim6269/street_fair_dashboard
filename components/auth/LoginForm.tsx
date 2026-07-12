@@ -1,167 +1,127 @@
 "use client";
 
-import { useState } from "react";
-import { useFormContext } from "react-hook-form";
-import { z } from "zod";
-import useAuth from "@/hooks/useAuth";
-import Image from "next/image";
-import AuthIcons from "../icons/AuthIcons";
-import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
-import Checkbox from "../form/Checkbox";
-import { Form } from "@/components/form/Form";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Loader2, Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { IS_DEV } from "@/lib/constants";
-
-
-
-const defaultValues: LoginFormValues = IS_DEV ? {
-  email: "admin@gmail.com",
-  password: "Admin@123456",
-} : {
-  email: "",
-  password: "",
-};
-
+import GenericInput from "../common/generic-input/GenericInput";
+import useAuth from "@/hooks/useAuth";
 
 const loginSchema = z.object({
-  email: z.string().email("Please enter a valid email address.").min(1, "Email is required"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-
+  email: z
+    .string()
+    .min(1, "Email Address is required")
+    .email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+  rememberMe: z.boolean(),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-function LoginFormFields({
-  isLoading,
-  submitError,
-  
-}: {
-  isLoading: boolean;
-  submitError: string;
-}) {
-  const [showPassword, setShowPassword] = useState(false);
-  // Get form state from context
+const LoginForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const { login, isLoading } = useAuth();
+
   const {
     register,
+    handleSubmit,
     formState: { errors },
-    
-  } = useFormContext<LoginFormValues>();
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
+  });
 
-  return (
-    <>
-      <p className="self-stretch text-lg font-bold leading-[130%] text-(--Stroke,#2A3542) opacity-70 font-[Lora]">
-        Log in as a Admin
-      </p>
-
-      <div className="relative">
-        <input
-          type="email"
-          autoComplete="email"
-          placeholder="Email"
-          className="auth-input pl-12"
-          {...register("email")}
-        />
-        <AuthIcons.EmailIcon className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-900" />
-
-      </div>
-      {errors.email && (
-        <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-      )}
-
-      <div className="relative">
-        <input
-          type={showPassword ? "text" : "password"}
-          autoComplete="current-password"
-          placeholder="Password"
-          className="auth-input pl-12"
-          {...register("password")}
-        />
-        <AuthIcons.PasswordIcon className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-900" />
-
-        {
-          showPassword ? (
-            <EyeIcon onClick={() => setShowPassword(false)} className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-800 cursor-pointer" />
-          ) : (
-            <EyeOffIcon onClick={() => setShowPassword(true)} className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-800 cursor-pointer" />
-          )
-        }
-
-      </div>
-      {errors.password && (
-        <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
-      )}
-
-      <Link href="/forgot-password" className="mb-2 text-right text-sm font-normal leading-[120%] text-[#697586] [font:Inter] block">
-        Forgot password?
-      </Link>
-
-      <div className="flex items-center gap-2">
-        <Checkbox />
-        <p className="text-base font-medium leading-[160%] text-[#697586] opacity-70 [font:Inter]">
-          Remember me
-        </p>
-      </div>
-
-      {submitError && (
-        <div className="rounded-md border border-red-200 bg-red-50 p-3">
-          <p className="text-center text-sm text-red-600">{submitError}</p>
-        </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="btn-primary disabled:cursor-not-allowed bg-[linear-gradient(136deg,#4C1D95_0%,#7C3AED_100%)] hover:shadow-purple-600/30"
-      >
-        {isLoading ? (
-          <div className="flex items-center gap-2 text-gray-800">
-            <Loader2 className="h-4 w-4 animate-spin md:h-5 md:w-5" />
-            Logging in...
-          </div>
-        ) : (
-          "Sign In"
-        )}
-      </button>
-    </>
-  );
-}
-
-export default function LoginForm() {
-  const { login, isLoading } = useAuth();
-  const [submitError, setSubmitError] = useState("");
-  const router = useRouter();
   const onSubmit = async (data: LoginFormValues) => {
+    setIsSubmitting(true);
     setSubmitError("");
     try {
-      await login(data);
-      // cookie.set("access-token", "1234567890");
-      // router.push("/dashboard");
+      await login({ email: data.email, password: data.password });
     } catch (err) {
-      console.log(err);
       setSubmitError(err instanceof Error ? err.message : "Login failed");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
-      <div className="flex flex-col items-center gap-8">
-        <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora]">StreetFood</h1>
+    <div className="w-full">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-4">
+        <GenericInput
+          {...register("email")}
+          error={errors.email?.message}
+          prefix={<Mail className="w-5 h-5 text-slate-500" />}
+          label="Email Address"
+          placeholder="you@example.com"
+          type="email"
+          size="sm"
+          fullWidth
+        />
 
-        <Form<LoginFormValues>
-          schema={loginSchema}
-          defaultValues={defaultValues}
-          onSubmit={onSubmit}
-          className="w-full space-y-4"
+        <GenericInput
+          {...register("password")}
+          error={errors.password?.message}
+          label="Password"
+          type="password"
+          placeholder="••••••••"
+          size="sm"
+          passwordToggle={true}
+          fullWidth
+        />
+
+        <div className="flex items-center justify-between gap-2 mt-2">
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="rememberMe"
+              {...register("rememberMe")}
+              className="w-4 h-4 text-purple-600 rounded border-gray-300 focus:ring-purple-500 cursor-pointer"
+            />
+            <label htmlFor="rememberMe" className="text-sm text-[#697586]">
+              Keep me signed in
+            </label>
+          </div>
+          <Link
+            href="/forgot-password"
+            className="text-sm font-bold text-[#4C1D95] underline"
+          >
+            Forgot password?
+          </Link>
+        </div>
+
+        {submitError && (
+          <div className="rounded-xl border border-red-200 bg-red-50 p-3">
+            <p className="text-center text-sm text-red-600">{submitError}</p>
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={isSubmitting || isLoading}
+          className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-semibold text-white transition-all duration-200 bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] hover:shadow-lg hover:shadow-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <LoginFormFields isLoading={isLoading} submitError={submitError} />
-        </Form>
-      </div>
-
-      <div className="mt-8 flex w-full items-center justify-between">
-        <p className="text-sm text-[#697586]">Privacy Policy</p>
-        <p className="text-sm text-[#697586]">Copyright 2026</p>
-      </div>
+          {isSubmitting || isLoading ? (
+            <>
+              <Loader2 className="h-5 w-5 animate-spin" />
+              Signing in...
+            </>
+          ) : (
+            <>
+              Sign in to workspace
+              <ArrowRight className="h-5 w-5" />
+            </>
+          )}
+        </button>
+      </form>
     </div>
   );
-}
+};
+
+export default LoginForm;

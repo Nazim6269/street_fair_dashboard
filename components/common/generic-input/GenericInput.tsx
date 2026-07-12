@@ -1,49 +1,96 @@
-//GenericInput.tsx
-import React, { forwardRef, memo, useCallback } from "react";
+import React, { forwardRef, useCallback, useState } from "react";
 import { InputWrapper } from "./InputWrapper";
-import { useInputId } from "../model/useInputId";
-import { usePasswordToggle } from "../model/usePasswordToggle";
-import { buildInputClass, cn, sizeConfig } from "../config/theme/inputTokens";
-import { TextInputProps } from "../config/type/InputWrapperProps";
-import { Spinner } from "./icons/Spinner";
-import FileUploadIcon from "./icons/FileUploadIcon";
-import { EyeIcon, EyeOffIcon, XIcon } from "lucide-react";
+import { sizeConfig } from "./input.size";
+import { variantConfig } from "./input.variant";
+import { buildInputClass } from "./input.style";
+import { cn } from "@/lib/utils";
+import type { TextInputProps, InputSize, InputVariant } from "./input.type.d";
+
+function Spinner({ className }: { className?: string }) {
+  return (
+    <svg className={cn("animate-spin", className)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+    </svg>
+  );
+}
+
+function EyeIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function EyeOffIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24" />
+      <line x1="1" y1="1" x2="23" y2="23" />
+    </svg>
+  );
+}
+
+function XIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  );
+}
+
+function FileUploadIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" y1="3" x2="12" y2="15" />
+    </svg>
+  );
+}
+
+function useInputId(providedId?: string): string {
+  const [id] = useState(() => providedId || `input-${Math.random().toString(36).slice(2, 9)}`);
+  return id;
+}
+
+function usePasswordToggle() {
+  const [visible, setVisible] = useState(false);
+  const toggle = useCallback(() => setVisible((v) => !v), []);
+  const inputType = visible ? "text" : "password";
+  return { visible, toggle, inputType };
+}
 
 export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
   function GenericInput(
     {
-      // Identity
       id: providedId,
       name,
       type = "text",
-      // Layout
       size = "md",
       variant = "outlined",
       fullWidth = false,
-      // Wrapper/label
       label,
       wrapperClassName,
       labelClassName,
       errorClassName,
       helperClassName,
-      // Feedback
       error,
       helperText,
       successText,
       required,
-      // Slots
       prefix,
       suffix,
       prefixClassName,
       suffixClassName,
-      // Features
       loading = false,
       clearable = false,
       passwordToggle: passwordToggleProp,
-      // State
       disabled = false,
       readOnly = false,
-      // Input props
       value,
       defaultValue,
       onChange,
@@ -62,13 +109,11 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
     const { visible, toggle, inputType } = usePasswordToggle();
 
     const resolvedType = isPassword ? inputType : type;
-    const hasError =
-      !!error && (Array.isArray(error) ? error.length > 0 : true);
+    const hasError = !!error && (Array.isArray(error) ? error.length > 0 : true);
     const hasSuccess = !hasError && !!successText;
 
-    const s = sizeConfig[size];
+    const s = sizeConfig[size as keyof typeof sizeConfig];
 
-    // Whether there's a value (for clearable button)
     const hasValue =
       value !== undefined
         ? String(value).length > 0
@@ -79,7 +124,6 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
     const handleClear = useCallback(
       (e: React.MouseEvent) => {
         e.preventDefault();
-        // Fire a synthetic change event with empty value
         const nativeInput = (ref as React.RefObject<HTMLInputElement>)?.current;
         if (nativeInput) {
           const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
@@ -93,19 +137,15 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
       [ref],
     );
 
-    // Build suffix: loading → password toggle → clear → user suffix
     const resolvedSuffix = loading ? (
-      <Spinner className={cn(s.icon, "text-slate-400")} />
+      <Spinner className={cn(s?.icon || "w-4 h-4", "text-slate-400")} />
     ) : showPasswordToggle && isPassword ? (
       <button
         type="button"
         tabIndex={-1}
         onClick={toggle}
         aria-label={visible ? "Hide password" : "Show password"}
-        className={cn(
-          "flex items-center justify-center  hover:text-slate-600 transition-colors",
-          s.icon,
-        )}
+        className={cn("flex items-center justify-center hover:text-slate-600 transition-colors", s?.icon || "w-4 h-4")}
       >
         {visible ? <EyeOffIcon /> : <EyeIcon />}
       </button>
@@ -115,10 +155,7 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
         tabIndex={-1}
         onClick={handleClear}
         aria-label="Clear input"
-        className={cn(
-          "flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors rounded-full",
-          s.icon,
-        )}
+        className={cn("flex items-center justify-center text-slate-400 hover:text-slate-600 transition-colors rounded-full", s?.icon || "w-4 h-4")}
       >
         <XIcon />
       </button>
@@ -130,8 +167,8 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
     const hasPrefix = !!prefix;
 
     const inputClass = buildInputClass({
-      size,
-      variant,
+      size: size as InputSize,
+      variant: variant as InputVariant,
       hasError,
       hasSuccess,
       disabled,
@@ -141,7 +178,6 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
       extra: inputClassName ?? className,
     });
 
-    // File input - render custom file upload with icon
     if (isFile) {
       return (
         <div className={cn("flex items-center gap-2", className)}>
@@ -160,19 +196,12 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
           />
           <label
             htmlFor={id}
-            className={cn(
-              "cursor-pointer flex items-center justify-center",
-              disabled && "cursor-not-allowed opacity-50"
-            )}
+            className={cn("cursor-pointer flex items-center justify-center", disabled && "cursor-not-allowed opacity-50")}
           >
             <FileUploadIcon />
           </label>
           {label && (
-            <span className={cn(
-              "text-sm text-gray-700",
-              disabled ? "cursor-not-allowed opacity-50" : "",
-              labelClassName
-            )}>
+            <span className={cn("text-sm text-gray-700", disabled ? "cursor-not-allowed opacity-50" : "", labelClassName)}>
               {label}
             </span>
           )}
@@ -180,7 +209,6 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
       );
     }
 
-    // Radio input - render without InputWrapper to avoid size issues
     if (isRadio) {
       return (
         <label className={cn("flex items-center gap-2", className)}>
@@ -194,25 +222,22 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
             className="peer sr-only"
             {...rest}
           />
-
-          {/* Outer circle acts as state container */}
           <div
             className={cn(
               "w-5 h-5 rounded-full border border-gray-400 flex items-center justify-center transition",
               "peer-checked:border-[#4A3A2F]",
               "peer-focus:ring-2 peer-focus:ring-[#4A3A2F]",
-              "[&>div]:scale-0 peer-checked:[&>div]:scale-100", 
+              "[&>div]:scale-0 peer-checked:[&>div]:scale-100",
               disabled && "opacity-50 cursor-not-allowed",
             )}
           >
-            {/* Inner dot */}
             <div className="w-3.5 h-3.5 rounded-full bg-[#4A3A2F] transition-transform duration-150" />
           </div>
-
-          {label && <span className="text-headingColor font-semibold text-lg sm:text-2xl">{label}</span>}
+          {label && <span className="font-semibold text-lg sm:text-2xl">{label}</span>}
         </label>
       );
     }
+
     return (
       <InputWrapper
         id={id}
@@ -226,17 +251,15 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
         labelClassName={labelClassName}
         errorClassName={errorClassName}
         helperClassName={helperClassName}
-        size={size}
+        size={size as any}
         disabled={disabled}
       >
-        {/* Input + icon layer */}
-        <div className="relative flex items-center">
-          {/* Prefix */}
+        <div className="relative flex items-center w-full">
           {hasPrefix && (
             <span
               className={cn(
                 "absolute left-0 flex items-center justify-center pointer-events-none",
-                s.icon,
+                s?.icon || "w-4 h-4",
                 "ml-3",
                 prefixClassName,
               )}
@@ -245,7 +268,6 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
             </span>
           )}
 
-          {/* Input element */}
           <input
             ref={ref}
             id={id}
@@ -266,12 +288,11 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
             {...rest}
           />
 
-          {/* Suffix */}
           {hasSuffix && (
             <span
               className={cn(
-                "absolute right-0 flex items-center justify-center text-black dark:text-white",
-                s.icon,
+                "absolute right-0 flex items-center justify-center text-black",
+                s?.icon || "w-4 h-4",
                 "mr-3",
                 suffixClassName,
               )}
@@ -284,3 +305,5 @@ export const GenericInput = forwardRef<HTMLInputElement, TextInputProps>(
     );
   },
 );
+
+export default GenericInput;

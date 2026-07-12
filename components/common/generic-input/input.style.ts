@@ -1,7 +1,7 @@
-import { sizeConfig } from "@/components/tokens/tokens/input.size";
-import { variantConfig } from "@/components/tokens/tokens/input.variant";
-import { cn } from "@/components/utils/cn";
-import { InputSize, InputVariant } from "@/types/inputType";
+import { sizeConfig } from "./input.size";
+import { variantConfig } from "./input.variant";
+import { cn } from "@/lib/utils";
+import type { InputSize, InputVariant } from "./input.type.d";
 
 interface BuildInputClassOptions {
   size: InputSize;
@@ -37,17 +37,14 @@ export function buildInputClass({
         ? `${v.base} ${v.success}`
         : `${v.base} ${v.focus}`;
 
-  // Adjust horizontal padding when prefix/suffix present
-  const prefixPad = hasPrefix && variant !== "ghost" ? "pl-9" : "";
-  const suffixPad = hasSuffix && variant !== "ghost" ? "pr-9" : "";
+  const prefixPad = hasPrefix && variant !== "ghost" ? "pl-10" : "";
+  const suffixPad = hasSuffix && variant !== "ghost" ? "pr-10" : "";
 
   return cn(
     "w-full outline-none transition-all duration-150",
-    "text-blue46 ",
-    "placeholder:text-grayBlack ",
-    "[&::-webkit-datetime-edit]:text-grayBlack",
+    "text-slate-800",
+    "placeholder:text-slate-400",
     "disabled:opacity-60",
-    "[&::-webkit-calendar-picker-indicator]:hidden",
     s.input,
     s.radius,
     stateClass,
@@ -58,15 +55,13 @@ export function buildInputClass({
   );
 }
 
-// ─── Label class builder ──────────────────────────────────────────────────────
-
 export function buildLabelClass(
   size: InputSize,
   disabled: boolean,
   extra?: string,
 ): string {
   return cn(
-    "block select-none ",
+    "block select-none",
     sizeConfig[size].label,
     disabled && "opacity-50",
     extra,

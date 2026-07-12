@@ -1,19 +1,13 @@
 import {
   InputHTMLAttributes,
   TextareaHTMLAttributes,
-  SelectHTMLAttributes,
   ReactNode,
   Ref,
 } from "react";
 
-export type InputSize = "sm" | "xsm";
+export type InputSize = "sm" | "xsm" | "md" | "lg";
 export type InputVariant = "outlined" | "filled" | "ghost";
-export type InputState =
-  | "default"
-  | "error"
-  | "success"
-  | "warning"
-  | "disabled";
+export type InputState = "default" | "error" | "success" | "warning" | "disabled";
 export type InputType =
   | "text"
   | "password"
@@ -62,7 +56,6 @@ export interface BaseInputProps extends InputStyleConfig {
   required?: boolean;
   disabled?: boolean;
   readOnly?: boolean;
-  darkMode?: boolean;
 }
 
 export interface TextInputProps
@@ -86,11 +79,8 @@ export interface TextareaProps
   rows?: number;
   showCount?: boolean;
   maxLength?: number;
-  maxLength?: number;
   ref?: Ref<HTMLTextAreaElement>;
 }
-
-// ─── InputWrapper ────────────────────────────────────────────────────────────
 
 export interface InputWrapperProps {
   id: string;
