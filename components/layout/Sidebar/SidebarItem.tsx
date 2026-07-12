@@ -103,15 +103,15 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         <div className={`overflow-hidden transition-all duration-200 ease-in-out ${open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
           <div className="ml-6 flex flex-col relative">
             <div className="absolute left-0 top-0 bottom-6 w-px bg-gray-600 h-[calc(100%-2rem)]" />
-            {children.map((child) => (
-              <>
+            {children.map((child,idx) => (
+              <div key={idx}>
                 <ChildItem
                   key={child.label}
                   label={child.label}
                   href={child.href}
                   isActive={isRouteActive(pathname, child.href)}
                 />
-              </>
+              </div>
 
             ))}
 

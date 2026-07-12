@@ -1,6 +1,7 @@
 import { VendorsByStatus } from "@/types/dashboard.types";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 
 interface Props {
   vendorsByStatus: VendorsByStatus | undefined;
@@ -52,6 +53,7 @@ const dummyData = {
 };
 
 const VendorsStatusChart = ({ vendorsByStatus }: Props) => {
+  const [selectedPeriod, setSelectedPeriod] = useState("this-year");
   const dataToUse = vendorsByStatus || dummyData;
 
   const chartData = useMemo(() => {
@@ -80,9 +82,15 @@ const VendorsStatusChart = ({ vendorsByStatus }: Props) => {
       <div className="bg-white md:p-6 p-4 rounded-2xl border border-purple-100 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <h3 className="section-title">Vendors by Status</h3>
-          <select className="border border-purple-200 rounded-lg px-3 py-1.5 text-sm text-[#2A3542] focus:outline-none focus:ring-2 focus:ring-purple-500">
-            <option>This Year</option>
-          </select>
+          <GenericDropDown
+            options={[{ label: "This Year", value: "this-year" }, { label: "Last Year", value: "last-year" }]}
+            value={selectedPeriod}
+            onValueChange={(value) => setSelectedPeriod(value.toString())}
+            placeholder="Select Period"
+            variant="light"
+            size="sm"
+            radius="sm"
+          />
         </div>
 
         <div className="w-full h-[180px] relative overflow-hidden">

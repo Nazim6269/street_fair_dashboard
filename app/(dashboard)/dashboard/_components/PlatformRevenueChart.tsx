@@ -1,4 +1,4 @@
-import { ReusableSelect } from '@/components/form/CustomSelect';
+import GenericDropDown from '@/components/common/generic-dropdown/GenericDropdown';
 import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LabelList, Tooltip, Legend } from 'recharts';
 
@@ -56,11 +56,14 @@ const PlatformRevenueChart = () => {
         <div className="w-full h-[445px] bg-white md:p-6 p-4 rounded-2xl border border-purple-100 shadow-sm">
             <div className="flex items-center justify-between mb-6">
                 <h3 className="section-title">Platform Revenue</h3>
-                <ReusableSelect
-                    variant="outline"
-                    value={selectedOption}
+                <GenericDropDown
                     options={[{ label: "This Year", value: "this-year" }, { label: "Last Year", value: "last-year" }]}
-                    onValueChange={(value) => setSelectedOption(value)}
+                    value={selectedOption}
+                    onValueChange={(value) => setSelectedOption(value.toString())}
+                    placeholder="Select Period"
+                    variant="light"
+                    size="md"
+                    radius="sm"
                 />
             </div>
             <ResponsiveContainer width="100%" height="85%">

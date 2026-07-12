@@ -1,8 +1,8 @@
 "use client";
 
 import HeaderNotifyIcons from "@/components/icons/HeaderNotifyIcons";
-import { ReusableSelect } from "@/components/form/CustomSelect";
 import GenericButton from "@/components/common/generic-button/GenericButton";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 import { useState } from "react";
 import { RefreshCcwIcon } from "lucide-react";
 import { PendingVendorVerifications, VendorsByStatus, TopVendors, PlatformRevenueChart, DashboardStats } from "./_components";
@@ -35,13 +35,14 @@ export default function DashboardPage() {
                 <PageTitle title="Welcome, Nazim uddin 👋" description="Manage your platform data, operational health and vendor ecosystem status." />
 
                 <div className="flex items-center gap-3">
-                    <ReusableSelect
-                        variant="outline"
-                        value={selectedOption}
+                    <GenericDropDown
                         options={[{ label: "This Month", value: "this-month" }, { label: "This Week", value: "this-week" }]}
-                        onValueChange={(value) => {
-                            setSelectedOption(value);
-                        }}
+                        value={selectedOption}
+                        onValueChange={(value) => setSelectedOption(value.toString())}
+                        placeholder="Select Period"
+                        variant="light"
+                        size="md"
+                        radius="sm"
                     />
 
                     <GenericButton
