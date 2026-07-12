@@ -1,33 +1,40 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-
+import GenericButton from '@/components/common/generic-button/GenericButton'
 
 export default function SuccessPage() {
   return (
-    <div className="flex min-w-[380px] flex-col items-center gap-[60px] rounded-3xl [background:var(--Opacity-Dark-05,rgba(8,14,30,0.05))] p-5 md:min-w-[600px] md:p-10">
+    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+      <div className="flex flex-col items-center gap-6">
+        <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">StreetFood</h1>
 
-      <div className="flex w-full max-w-[440px] flex-col items-center gap-[40px]">'
-        <div className="w-[265px] h-[140px]">
-          <Image src="/images/success-icon.png" alt="success" width={265} height={140} />
+        <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] flex items-center justify-center">
+          <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
         </div>
 
-        <h1 className="self-stretch text-[color:var(--Stroke,#2A3542)] text-center [font-family:Lora] text-[40px] font-bold leading-[130%] tracking-[1.6px] mb-3">You’ve successfully reset your password!</h1>
-        <p className="self-stretch text-[color:var(--Secondary-Text,#697586)] text-center [font-family:Inter] text-sm font-normal leading-[160%]">Password updated! You’re all set to continue</p>
-
-
-
+        <div className="text-center">
+          <h2 className="text-[#2A3542] font-[Lora] text-2xl font-bold">Password Reset Successful!</h2>
+          <p className="text-[#697586] text-sm mt-2">Password updated! You're all set to continue.</p>
+        </div>
 
         <Link className="w-full" href="/login">
-
-          <button className="btn-primary w-full">Go to Login</button>
-
+          <GenericButton
+            type="button"
+            title="Go to Login"
+            variant="violet"
+            size="large"
+            align="center"
+            className="w-full"
+          />
         </Link>
+      </div>
 
+      <div className="mt-8 flex w-full items-center justify-between">
+        <p className="text-sm text-[#697586]">Privacy Policy</p>
+        <p className="text-sm text-[#697586]">Copyright 2026</p>
       </div>
     </div>
   )
 }
-
-
-
