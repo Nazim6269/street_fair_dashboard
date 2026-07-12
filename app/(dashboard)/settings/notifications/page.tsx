@@ -1,152 +1,109 @@
-import React from 'react'
+"use client";
 
-export default function page() {
-    return (
-        <div className=' space-y-6'>
-            <h3 className='text-[#2A3542] font-lora text-2xl font-bold leading-[130%] tracking-[0.48px] py-4 border-b border-[#E6E6E6] real'>Notification Preferences</h3>
-
-
-
-
-            {/* System Alerts */}
-
-            <section className='p-6 rounded-xl bg-white border border-[#E6E6E6] space-y-2 relative'>
-                <div>
-                    <p className='text-[#2A3542] font-lora text-base font-bold leading-[130%] mb-1'>System Alerts</p>
-
-                    <p className='text-[#697586] font-inter text-sm font-normal leading-[160%]'>Critical infrastructure updates and maintenance notifications.</p>
-                </div>
-
-                {/* Items */}
-                <div className="">
-                    <AlertItem
-                        icon={<Mail className="h-5 w-5 text-[#697586]" />}
-                        label="Email Notifications"
-                        checked
-                    />
-
-                    <AlertItem
-                        icon={<MessageSquare className="h-5 w-5 text-[#697586]" />}
-                        label="SMS Alerts"
-                    />
-
-                    <AlertItem
-                        icon={<Bell className="h-5 w-5 text-[#697586]" />}
-                        label="In-App Banner"
-                        checked
-                        noBorder
-                    />
-                </div>
-
-
-                <span className='w-1 h-8 absolute [background:var(--Primary-Linear,linear-gradient(136deg,#FFBB1C_0%,#E28611_100%))] rounded-[0_12px_12px_0] top-8 left-0'></span>
-            </section>
-
-            {/* Vendor Updates */}
-            <section className='p-6 rounded-xl bg-white border border-[#E6E6E6] space-y-2 relative'>
-                <div>
-                    <p className='text-[#2A3542] font-lora text-base font-bold leading-[130%] mb-1'>Vendor Updates</p>
-
-                    <p className='text-[#697586] font-inter text-sm font-normal leading-[160%]'>Stay informed about vendor updates.</p>
-                </div>
-
-                {/* Items */}
-                <div className="">
-                    <AlertItem
-                        icon={<Mail className="h-5 w-5 text-[#697586]" />}
-                        label="Email Notifications"
-                        checked
-                    />
-
-                    <AlertItem
-                        icon={<MessageSquare className="h-5 w-5 text-[#697586]" />}
-                        label="SMS Alerts"
-                    />
-
-                    <AlertItem
-                        icon={<Bell className="h-5 w-5 text-[#697586]" />}
-                        label="In-App Banner"
-                        checked
-                        noBorder
-                    />
-                </div>
-
-
-                <span className='w-1 h-8 absolute bg-[#3AC2C2] rounded-[0_12px_12px_0] top-8 left-0'></span>
-            </section>
-            {/* Customer Reports  */}
-            <section className='p-6 rounded-xl bg-white border border-[#E6E6E6] space-y-2 relative'>
-                <div>
-                    <p className='text-[#2A3542] font-lora text-base font-bold leading-[130%] mb-1'>Customer Reports</p>
-
-                    <p className='text-[#697586] font-inter text-sm font-normal leading-[160%]'>Monitor reports against customers and customer behavior insights.</p>
-                </div>
-
-                {/* Items */}
-                <div className="">
-                    <AlertItem
-                        icon={<Mail className="h-5 w-5 text-[#697586]" />}
-                        label="Email Notifications"
-                        checked
-                    />
-
-                    <AlertItem
-                        icon={<MessageSquare className="h-5 w-5 text-[#697586]" />}
-                        label="SMS Alerts"
-                    />
-
-                    <AlertItem
-                        icon={<Bell className="h-5 w-5 text-[#697586]" />}
-                        label="In-App Banner"
-                        checked
-                        noBorder
-                    />
-                </div>
-
-
-                <span className='w-1 h-8 absolute bg-[#3AC2C2] rounded-[0_12px_12px_0] top-8 left-0'></span>
-            </section>
-        </div>
-    )
-
-}
-
-
-
-import { Bell, Mail, MessageSquare, TerminalSquare } from "lucide-react";
+import React from 'react';
+import { Bell, Mail, MessageSquare, Settings } from "lucide-react";
 import { Switch } from '@/components/ui/switch';
-// import { Switch } from "@/components/ui/switch";
-// import Switch from '@/components/reusable/Switch';
 
+const sections = [
+    {
+        title: "System Alerts",
+        description: "Critical infrastructure updates and maintenance notifications.",
+        color: "from-[#4C1D95] to-[#7C3AED]",
+        items: [
+            { icon: Mail, label: "Email Notifications", checked: true },
+            { icon: MessageSquare, label: "SMS Alerts", checked: false },
+            { icon: Bell, label: "In-App Banner", checked: true },
+        ]
+    },
+    {
+        title: "Vendor Updates",
+        description: "Stay informed about vendor updates.",
+        color: "from-[#6D28D9] to-[#8B5CF6]",
+        items: [
+            { icon: Mail, label: "Email Notifications", checked: true },
+            { icon: MessageSquare, label: "SMS Alerts", checked: false },
+            { icon: Bell, label: "In-App Banner", checked: true },
+        ]
+    },
+    {
+        title: "Customer Reports",
+        description: "Monitor reports against customers and customer behavior insights.",
+        color: "from-[#7C3AED] to-[#A78BFA]",
+        items: [
+            { icon: Mail, label: "Email Notifications", checked: true },
+            { icon: MessageSquare, label: "SMS Alerts", checked: false },
+            { icon: Bell, label: "In-App Banner", checked: true },
+        ]
+    }
+];
 
 function AlertItem({
-    icon,
+    icon: Icon,
     label,
     checked = false,
     noBorder = false,
 }: {
-    icon: React.ReactNode;
+    icon: React.ElementType;
     label: string;
     checked?: boolean;
     noBorder?: boolean;
 }) {
     return (
         <div
-            className={`flex items-center justify-between py-4 ${noBorder ? "" : "border-b border-[#EEF2F6]"
-                }`}
+            className={`flex items-center justify-between py-4 ${noBorder ? "" : "border-b border-purple-100"}`}
         >
             <div className="flex items-center gap-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F1F5F9]">
-                    {icon}
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-100">
+                    <Icon className="h-5 w-5 text-[#7C3AED]" />
                 </div>
-
-                <p className="text-base font-medium text-[#111827]">{label}</p>
+                <p className="text-base font-medium text-[#2A3542]">{label}</p>
             </div>
 
             <Switch
                 defaultChecked={checked}
-                className="data-[state=checked]:bg-[#F59E0B]"
+                className="data-[state=checked]:bg-[#7C3AED]"
             />
+        </div>
+    );
+}
+
+export default function NotificationsPage() {
+    return (
+        <div className="space-y-6">
+            <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] flex items-center justify-center">
+                    <Settings className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                    <h3 className="text-[#2A3542] font-[Lora] text-xl font-bold">Notification Preferences</h3>
+                    <p className="text-sm text-[#697586]">Configure how you receive notifications</p>
+                </div>
+            </div>
+
+            <div className="grid gap-4">
+                {sections.map((section) => (
+                    <div key={section.title} className="p-6 rounded-2xl border border-purple-100 bg-purple-50/30 relative overflow-hidden">
+                        <div className={`absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${section.color}`} />
+                        
+                        <div className="mb-4">
+                            <h4 className="text-[#2A3542] font-[Lora] text-base font-bold mb-1">{section.title}</h4>
+                            <p className="text-[#697586] text-sm">{section.description}</p>
+                        </div>
+
+                        <div>
+                            {section.items.map((item, idx) => (
+                                <AlertItem
+                                    key={item.label}
+                                    icon={item.icon}
+                                    label={item.label}
+                                    checked={item.checked}
+                                    noBorder={idx === section.items.length - 1}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

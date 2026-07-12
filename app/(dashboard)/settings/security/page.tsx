@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { Eye, EyeOff, Pencil } from "lucide-react";
+import { Eye, EyeOff, Lock, Shield } from "lucide-react";
 
-export default function AdminInformationPage() {
+export default function SecurityPage() {
     const [isEditing, setIsEditing] = useState(false);
 
     const [showPassword, setShowPassword] = useState({
@@ -34,7 +34,6 @@ export default function AdminInformationPage() {
         }
 
         console.log("Saving data:", formData);
-
         setIsEditing(false);
     };
 
@@ -55,41 +54,47 @@ export default function AdminInformationPage() {
     };
 
     return (
-        <div className="space-y-6 max-w-7xl">
-            {/* Header */}
-            <div className="flex justify-between items-center py-4 border-b border-[#E6E6E6]">
-                <h3 className="text-[#2A3542] font-lora text-2xl font-bold">
-                    Admin Information
-                </h3>
+        <div className="space-y-6">
+            <div className="flex justify-between items-center">
+                <h3 className="text-[#2A3542] font-[Lora] text-xl font-bold">Security Settings</h3>
 
                 {!isEditing ? (
                     <button
                         onClick={() => setIsEditing(true)}
-                        className="flex items-center gap-2 text-[#E28611] font-medium"
+                        className="flex items-center gap-2 text-[#7C3AED] font-medium hover:text-[#4C1D95] transition-colors"
                     >
-                        <Pencil size={18} /> Edit
+                        <Lock size={16} /> Change Password
                     </button>
                 ) : (
-                    <div className="flex gap-2">
+                    <div className="flex gap-3">
                         <button
                             onClick={handleCancel}
-                            className="h-14 px-6 py-4 rounded-2xl border border-[#70747C] text-[#585D63] font-medium"
+                            className="px-5 py-2.5 rounded-xl border border-purple-200 text-[#697586] font-medium hover:bg-purple-50 transition-colors"
                         >
                             Cancel
                         </button>
                         <button
                             onClick={handleSave}
-                            className="h-14 px-6 py-4 rounded-2xl bg-gradient-to-r from-[#FFBB1C] to-[#E28611] text-white font-semibold"
+                            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white font-semibold hover:shadow-lg hover:shadow-purple-500/20 transition-all"
                         >
-                            Save Changes
+                            Update Password
                         </button>
                     </div>
                 )}
             </div>
 
-            {/* Form */}
-            <div className="flex flex-col md:flex-row gap-8">
-                <div className="flex-1 space-y-6">
+            <div className="p-6 rounded-2xl border border-purple-100 bg-purple-50/30">
+                <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] flex items-center justify-center">
+                        <Shield className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                        <h4 className="font-semibold text-[#2A3542]">Password Management</h4>
+                        <p className="text-sm text-[#697586]">Update your password regularly to keep your account secure</p>
+                    </div>
+                </div>
+
+                <div className="space-y-5">
                     <InputField
                         placeholder="Enter your current password"
                         label="Current Password"
@@ -113,7 +118,7 @@ export default function AdminInformationPage() {
                     />
 
                     <InputField
-                        placeholder="Enter your confirm password"
+                        placeholder="Confirm your new password"
                         label="Confirm Password"
                         name="confirmPassword"
                         value={formData.confirmPassword}
@@ -149,7 +154,7 @@ function InputField({
 }) {
     return (
         <div>
-            <label className="mb-2 block text-[#697586] font-bold font-lora">
+            <label className="mb-2 block text-[#697586] text-sm font-medium">
                 {label}
             </label>
 
@@ -161,13 +166,13 @@ function InputField({
                     value={value}
                     onChange={onChange}
                     disabled={disabled}
-                    className="h-[54px] w-full rounded-md border border-[#DFE1E7] bg-[#F8FAFC] px-4 pr-12 text-sm text-[#161618] outline-none focus:border-[#F59E0B] disabled:cursor-not-allowed"
+                    className="h-12 w-full rounded-xl border border-purple-100 bg-purple-50/30 px-4 pr-12 text-sm text-[#161618] outline-none focus:border-[#7C3AED] focus:ring-2 focus:ring-purple-100 disabled:cursor-not-allowed transition-all"
                 />
 
                 <button
                     type="button"
                     onClick={onToggle}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#697586] hover:text-[#4C1D95] transition-colors"
                 >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
