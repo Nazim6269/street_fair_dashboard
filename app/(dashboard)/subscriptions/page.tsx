@@ -3,6 +3,7 @@ import AnalyticStats from '../analytics/_components/AnalyticStats'
 import PageTitle from '@/components/reusable/PageTitle'
 import OtherIcons from '@/components/icons/OtherIcons'
 import Link from 'next/link'
+import GenericButton from '@/components/common/generic-button/GenericButton'
 import SubscriptionPackagesTable from './_components/SubscriptionPackagesTable'
 import BillingTable from './_components/BillingTable'
 
@@ -12,16 +13,24 @@ export default function page() {
             <div className='flex items-center justify-between'>
                 <PageTitle title="Subscription Management" description="Configure and manage platform membership tiers." />
 
-                <div className='flex items-center gap-2'>
-                    <Link href={"/subscriptions/all-plans"} className='flex h-14 justify-center items-center gap-2 border border-[color:var(--Neutrals-05,#70747C)] px-6 py-4 rounded-2xl border-solid  text-nowrap  text-[color:var(--Neutrals-04,#585D63)] [font-family:Inter] text-base font-medium leading-[120%]    '>
-
-
-                        <span className='text-nowrap'>View Plans</span>
-                        <OtherIcons.LeftArrowIcon />
+                <div className='flex items-center gap-3'>
+                    <Link href={"/subscriptions/all-plans"}>
+                        <GenericButton
+                            title="View Plans"
+                            variant="cream"
+                            icon={<OtherIcons.LeftArrowIcon />}
+                            iconPosition="right"
+                            size="large"
+                        />
                     </Link>
 
-
-                    <Link href={"/subscriptions/create-plan"} className='btn-primary'>Create New Plan</Link>
+                    <Link href={"/subscriptions/create-plan"}>
+                        <GenericButton
+                            title="Create New Plan"
+                            variant="violet"
+                            size="large"
+                        />
+                    </Link>
                 </div>
             </div>
          

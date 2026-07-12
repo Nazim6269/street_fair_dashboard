@@ -1,4 +1,5 @@
 import React from "react";
+import GenericButton from "@/components/common/generic-button/GenericButton";
 
 type Plan = {
   name: string;
@@ -51,7 +52,7 @@ export default function PlanCard({ plan }: { plan: Plan }) {
 
         <hr className="my-7 border-[#EAECF0]" />
 
-        <button className="btn-primary">Edit Plan</button>
+        <GenericButton title="Edit Plan" variant="violet" align="center" className="w-full" />
       </div>
     </div>
   );

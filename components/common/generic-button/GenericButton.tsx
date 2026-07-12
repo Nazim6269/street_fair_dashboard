@@ -2,12 +2,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
 const buttonVariants = cva(
-  "rounded-lg text-sm font-medium transition-colors duration-200 ease-in-out flex items-center gap-1.5 cursor-pointer whitespace-nowrap w-fit",
+  "rounded-lg text-sm font-medium transition-colors duration-200 ease-in-out flex items-center gap-1.5 cursor-pointer whitespace-nowrap",
   {
     variants: {
       variant: {
         violet: "bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white leading-[124%] hover:shadow-lg hover:shadow-purple-500/30",
-        cream: "bg-[#FBF8F2] text-headingColor border border-[#DFE1E7]",
+        cream: "bg-purple-50 text-[#4C1D95] border border-purple-200 hover:bg-purple-100",
         red: "bg-red-600 text-white hover:bg-red-700",
         transparent: "bg-transparent text-headingColor border border-[#DFE1E7]",
       },

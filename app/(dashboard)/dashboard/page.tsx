@@ -2,6 +2,7 @@
 
 import HeaderNotifyIcons from "@/components/icons/HeaderNotifyIcons";
 import { ReusableSelect } from "@/components/form/CustomSelect";
+import GenericButton from "@/components/common/generic-button/GenericButton";
 import { useState } from "react";
 import { RefreshCcwIcon } from "lucide-react";
 import { PendingVendorVerifications, VendorsByStatus, TopVendors, PlatformRevenueChart, DashboardStats } from "./_components";
@@ -43,14 +44,23 @@ export default function DashboardPage() {
                         }}
                     />
 
-                    <button className="flex items-center gap-2 px-5 py-3 rounded-xl border border-purple-200 text-[#4C1D95] font-medium hover:bg-purple-50 transition-colors">
-                        <RefreshCcwIcon className="w-4 h-4" />
-                        <span className="text-nowrap">Sync</span>
-                    </button>
+                    <GenericButton
+                        title="Sync"
+                        variant="cream"
+                        icon={<RefreshCcwIcon className="w-4 h-4" />}
+                        iconPosition="left"
+                        size="mlarge"
+                        align="center"
+                        className="border-purple-200 text-[#4C1D95] hover:bg-purple-50 px-6"
+                    />
 
-                    <button className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white font-medium hover:shadow-lg hover:shadow-purple-500/20 transition-all">
-                        <span className="text-nowrap">Export</span>
-                    </button>
+                    <GenericButton
+                        title="Export"
+                        variant="violet"
+                        size="mlarge"
+                        align="center"
+                        className="px-6"
+                    />
                 </div>
             </div>
 

@@ -1,4 +1,5 @@
 import PageTitle from "@/components/reusable/PageTitle";
+import GenericButton from "@/components/common/generic-button/GenericButton";
 import CustomerStats from "./_components/CustomerStats";
 import CustomerManagementTable from "./_components/CustomerManagementTable";
 import Link from "next/link";
@@ -12,7 +13,7 @@ export default function customersPage() {
 
 
           <Link href="/customers/report">
-            <button className="btn-primary w-fit">Reported Customer Queue</button>
+            <GenericButton title="Reported Customer Queue" variant="violet" size="mlarge" />
           </Link>
         </div>
 

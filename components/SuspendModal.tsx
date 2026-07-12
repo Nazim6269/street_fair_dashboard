@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 import OtherIcons from "./icons/OtherIcons";
+import GenericButton from "@/components/common/generic-button/GenericButton";
 
 type ModalMode = "suspend" | "disable";
 
@@ -88,23 +88,27 @@ export default function VendorActionModal({
 
       {/* Actions */}
       <div className="mt-8 grid grid-cols-2 gap-4">
-        <Button
+        <GenericButton
           type="button"
-          variant="outline"
+          title="Cancel"
+          variant="cream"
+          align="center"
+          size="mlarge"
           onClick={onCancel}
-          className="h-[66px] rounded-[18px] border-[#667085] bg-white text-lg font-semibold text-[#4B5563] hover:bg-gray-50"
-        >
-          Cancel
-        </Button>
+          className=" w-full rounded-[18px] border-[#667085] text-lg font-semibold text-[#4B5563] hover:bg-gray-50"
+        />
 
-        <Button
+        <GenericButton
           type="button"
+          title={config.buttonText}
+          variant="red"
+          align="center"
+          size="mlarge"
+          icon={<OtherIcons.SuspendUser className="ml-2 h-5 w-5 text-white" />}
+          iconPosition="right"
           onClick={onConfirm}
-          className="h-[66px] rounded-[18px] bg-[#FF3838] text-lg font-semibold text-white hover:bg-[#F02F2F]"
-        >
-          {config.buttonText}
-          <OtherIcons.SuspendUser className="ml-2 h-5 w-5 text-white" />
-        </Button>
+          className="w-full rounded-[18px] text-lg font-semibold"
+        />
       </div>
     </div>
   );

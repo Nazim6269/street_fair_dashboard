@@ -27,12 +27,12 @@ export function ReusableTabs({ tabs, defaultValue, onValueChange, className }: R
                     <TabsPrimitive.Trigger
                         key={tab.value}
                         value={tab.value}
-                        className="group flex w-full max-w-[200px]  flex-col justify-end items-center gap-2 px-8 pb-2.5 text-sm font-semibold text-[#89A2C3] transition-all data-[state=active]:text-[#E28611]  relative outline-none "
+                        className="group flex w-full max-w-[200px]  flex-col justify-end items-center gap-2 px-8 pb-2.5 text-sm font-semibold text-[#89A2C3] transition-all data-[state=active]:text-[#4C1D95]  relative outline-none "
                     >
                         <span className="font-inter text-base font-semibold leading-[160%] ">
                             {tab.label}
                         </span>
-                        <span className="absolute bottom-0 left-0 right-0 h-1 self-stretch bg-linear-to-r from-[#FFBB1C] to-[#E28611] rounded-[10px_10px_0_0] scale-x-0 transition-transform group-data-[state=active]:scale-x-100 w-[calc(100%-20px)] mx-auto" />
+                        <span className="absolute bottom-0 left-0 right-0 h-1 self-stretch bg-linear-to-r from-[#7C3AED] to-[#4C1D95] rounded-[10px_10px_0_0] scale-x-0 transition-transform group-data-[state=active]:scale-x-100 w-[calc(100%-20px)] mx-auto" />
                     </TabsPrimitive.Trigger>
                 ))}
             </TabsPrimitive.List>

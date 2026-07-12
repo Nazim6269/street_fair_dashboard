@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import ReportsAccordion from './ReportsAccordion';
 import CustomModal from '@/components/reusable/CustomModal';
 import SuspendModal from '@/components/SuspendModal';
+import GenericButton from '@/components/common/generic-button/GenericButton';
 
 export default function ReportDetails({ selectedId }: { selectedId: string | null }) {
 
@@ -42,7 +43,7 @@ export default function ReportDetails({ selectedId }: { selectedId: string | nul
                     </div>
 
 
-                    <button className='px-4 py-2 rounded-xl bg-red-500 text-white ' onClick={handleSuspendModalOpen}>Suspend Customer</button>
+                    <GenericButton title="Suspend Customer" variant="red" size="default" onClick={handleSuspendModalOpen} />
                 </div>
 
                 <div className='w-full space-y-2  '>

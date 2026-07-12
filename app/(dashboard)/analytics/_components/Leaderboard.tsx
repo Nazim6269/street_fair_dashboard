@@ -141,7 +141,7 @@ function TopPerformersCard() {
 
               {/* Score Box */}
               <div
-                className={`mt-4 flex flex-col items-center justify-center rounded-t-[13px]  bg-[#DDD6FE] px-6 ${
+                className={`mt-4 flex flex-col items-center justify-center rounded-t-[13px]  bg-purple-200 px-6 ${
                   isFirst ? "h-[135px] w-[80px]" : "h-[106px] w-[70px]"
                 }`}
               >

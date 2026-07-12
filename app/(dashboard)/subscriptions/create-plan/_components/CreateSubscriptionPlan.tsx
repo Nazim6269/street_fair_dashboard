@@ -2,9 +2,9 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { ReusableSelect } from "@/components/form/CustomSelect";
 import GenericInput from "@/components/common/generic-input/GenericInput";
+import GenericButton from "@/components/common/generic-button/GenericButton";
 
 export default function CreateSubscriptionPlan() {
   return (
@@ -65,19 +65,23 @@ export default function CreateSubscriptionPlan() {
 
       {/* Bottom Actions */}
       <div className="flex justify-end gap-5">
-        <Button
+        <GenericButton
           type="button"
-          className="h-[54px] min-w-[220px] rounded-xl bg-[#D9D9D9] text-sm font-medium text-[#697586] hover:bg-[#D0D0D0]"
-        >
-          Cancel
-        </Button>
+          title="Cancel"
+          variant="cream"
+          size="large"
+          align="center"
+          className="min-w-[220px]"
+        />
 
-        <Button
+        <GenericButton
           type="button"
-          className="h-[54px] min-w-[220px] rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-sm font-semibold text-white hover:shadow-lg hover:shadow-purple-500/30 transition-all"
-        >
-          Create Plan
-        </Button>
+          title="Create Plan"
+          variant="violet"
+          size="large"
+          align="center"
+          className="min-w-[220px]"
+        />
       </div>
     </div>
   );
@@ -188,22 +192,25 @@ function PlanFeaturesCard() {
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-5">
-          <Button
+          <GenericButton
             type="button"
-            variant="ghost"
+            title="Cancel"
+            variant="cream"
+            size="default"
+            align="center"
             onClick={handleCancel}
-            className="h-10 rounded-lg text-xs font-medium text-[#697586] hover:bg-transparent"
-          >
-            Cancel
-          </Button>
+            className="h-10 rounded-lg text-xs font-medium"
+          />
 
-          <Button
+          <GenericButton
             type="button"
+            title={editingId ? "Update" : "Add"}
+            variant="violet"
+            size="default"
+            align="center"
             onClick={handleAddOrUpdate}
-            className="h-10 rounded-lg bg-[#7C3AED] text-xs font-semibold text-white hover:bg-[#6D28D9]"
-          >
-            {editingId ? "Update" : "Add"}
-          </Button>
+            className="h-10 rounded-lg text-xs font-semibold"
+          />
         </div>
 
         <div className="mt-6 space-y-4">
