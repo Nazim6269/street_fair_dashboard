@@ -7,6 +7,7 @@ import * as z from "zod";
 import { Loader2, Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import GenericInput from "../common/generic-input/GenericInput";
+import GenericButton from "../common/generic-button/GenericButton";
 import useAuth from "@/hooks/useAuth";
 
 const loginSchema = z.object({
@@ -102,23 +103,17 @@ const LoginForm = () => {
           </div>
         )}
 
-        <button
+        <GenericButton
           type="submit"
+          title={isSubmitting || isLoading ? "Signing in..." : "Sign in to workspace"}
+          icon={isSubmitting || isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <ArrowRight className="h-5 w-5" />}
+          iconPosition="right"
+          variant="violet"
+          size="large"
+          align="center"
           disabled={isSubmitting || isLoading}
-          className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-semibold text-white transition-all duration-200 bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] hover:shadow-lg hover:shadow-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting || isLoading ? (
-            <>
-              <Loader2 className="h-5 w-5 animate-spin" />
-              Signing in...
-            </>
-          ) : (
-            <>
-              Sign in to workspace
-              <ArrowRight className="h-5 w-5" />
-            </>
-          )}
-        </button>
+          className="w-full disabled:opacity-50 disabled:cursor-not-allowed"
+        />
       </form>
     </div>
   );
