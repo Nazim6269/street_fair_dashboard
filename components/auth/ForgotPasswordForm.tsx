@@ -14,9 +14,7 @@ import GenericButton from "@/components/common/generic-button/GenericButton";
 
 
 const forgotPasswordSchema = z.object({
-    email: z.string().email("Please enter a valid email address.").min(1, "Email is required"),
-
-
+    email: z.string().min(1, "Email is required"),
 });
 
 type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
@@ -31,6 +29,7 @@ function ForgotPasswordFormFields({
 
     // Get form state from context
     const {
+        register,
         formState: { errors },
     } = useFormContext<ForgotPasswordFormValues>();
 
@@ -39,22 +38,19 @@ function ForgotPasswordFormFields({
 
             <div>
                 <p className="text-[color:var(--Stroke,#2A3542)] [font-family:Lora] text-2xl font-bold leading-[130%] tracking-[0.48px]">Forgot Password?</p>
-                <p className="self-stretch text-[color:var(--Secondary-Text,#697586)] [font-family:Inter] text-base font-normal leading-[160%]">To reset your password, first enter your email. A verification code will be sent to ad****lis@gmail.com.</p>
+                <p className="self-stretch text-[color:var(--Secondary-Text,#697586)] [font-family:Inter] text-base font-normal leading-[160%]">To reset your password, first enter your email. A verification code will be sent to ad*****n@gmail.com.</p>
             </div>
 
             <div className="relative">
                 <GenericInput
-                    name="email"
+                    {...register("email")}
+                    error={errors.email?.message}
                     type="email"
                     placeholder="Email"
                     prefix={<AuthIcons.EmailIcon className="h-5 w-5 text-slate-900" />}
                     size="sm"
                 />
             </div>
-
-            {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-            )}
 
             {submitError && (
                 <div className="rounded-md border border-red-200 bg-red-50 p-3">

@@ -39,8 +39,8 @@ export function OTPField({ name, maxLength = 6 }: OTPFieldProps) {
                                     className="
                     w-10 h-14 md:w-12 md:h-16 
                     text-3xl md:text-4xl font-semibold 
-                    text-[#7C3AED] border-b-2 border-t-0 border-x-0 border-l-0 border-r-0 border-b-[#7C3AED] border-l-transparent border-r-transparent
-                    rounded-none focus-visible:ring-0
+                    text-[#7C3AED] border border-purple-200
+                    rounded-xl focus-visible:ring-0 focus-visible:border-[#7C3AED]
                   "
                                 />
                             ))}
@@ -63,7 +63,7 @@ import { useRouter } from "next/navigation";
 import GenericButton from "@/components/common/generic-button/GenericButton";
 
 const otpSchema = z.object({
-    code: z.string().length(6, "OTP must be 6 digits"),
+    code: z.string().min(1, "OTP is required"),
 });
 
 export default function VerifyOTPForm() {
@@ -84,16 +84,16 @@ export default function VerifyOTPForm() {
                     onSubmit={handleVerify}
                     defaultValues={{ code: "" }}
                 >
-                    <OTPField name="code" maxLength={6} />
+                        <OTPField name="code" maxLength={6} />
 
-                    <GenericButton
-                        type="submit"
-                        title="Verify Account"
-                        variant="violet"
-                        size="large"
-                        align="center"
-                        className="w-full mt-10"
-                    />
+                        <GenericButton
+                            type="submit"
+                            title="Verify Account"
+                            variant="violet"
+                            size="large"
+                            align="center"
+                            className="w-full mt-6"
+                        />
                 </Form>
             </div>
 

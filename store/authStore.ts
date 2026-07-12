@@ -4,6 +4,7 @@ import { User } from '@/types/auth.types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { authService } from "@/services/auth.service";
+import { setTokens } from "@/lib/session";
 
 interface AuthState {
   // State
@@ -41,8 +42,25 @@ export const useAuthStore = create<AuthState>()(
       login: async (credentials) => {
         set({ isLoading: true });
         try {
-          const user = await authService.login(credentials);
-          set({ user });
+          // Simulate login for demo credentials
+          if (credentials.email === "admin@gmail.com" && credentials.password === "Pass@123") {
+            const mockUser: User = {
+              id: "1",
+              email: "admin@gmail.com",
+              name: "Nazim uddin",
+              avatar: null,
+              country_code: null,
+              phone_number: null,
+              type: "ADMIN",
+              gender: null,
+              date_of_birth: null,
+              created_at: new Date().toISOString(),
+            };
+            await setTokens("mock-access-token", "mock-refresh-token");
+            set({ user: mockUser });
+          } else {
+            throw new Error("Invalid email or password");
+          }
         } catch (error) {
           throw error;
         } finally {

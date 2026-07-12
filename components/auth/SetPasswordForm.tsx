@@ -29,6 +29,7 @@ function SetPasswordFormFields({
     submitError: string;
 }) {
     const {
+        register,
         formState: { errors },
     } = useFormContext<SetPasswordFormValues>();
 
@@ -40,28 +41,24 @@ function SetPasswordFormFields({
             </div>
 
             <GenericInput
-                name="password"
+                {...register("password")}
+                error={errors.password?.message}
                 type="password"
                 placeholder="Enter new password"
                 prefix={<Lock className="w-4 h-4 text-slate-500" />}
                 passwordToggle={true}
                 size="sm"
             />
-            {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
-            )}
 
             <GenericInput
-                name="confirmPassword"
+                {...register("confirmPassword")}
+                error={errors.confirmPassword?.message}
                 type="password"
                 placeholder="Confirm new password"
                 prefix={<Lock className="w-4 h-4 text-slate-500" />}
                 passwordToggle={true}
                 size="sm"
             />
-            {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>
-            )}
 
             {submitError && (
                 <div className="rounded-md border border-red-200 bg-red-50 p-3">
