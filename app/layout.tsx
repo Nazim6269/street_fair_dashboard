@@ -16,8 +16,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "StreetFood on atliss",
-  description: "StreetFood on atliss Dashboard",
+  title: "StreetFood",
+  description: "StreetFood Dashboard",
 };
 
 export default function RootLayout({

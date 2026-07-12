@@ -24,22 +24,23 @@ export default function DashboardPage() {
                 <PageTitle title="Welcome, Nazim uddin 👋" description="Manage your platform data, operational health and vendor ecosystem status." />
 
                 {/* Right Side - Action Buttons */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                     <ReusableSelect
                         variant="outline"
-                        // placeholder="Select an option"
-                        // className="bg-white"
                         value={selectedOption}
-                        options={[{ label: "This Month", value: "this-month" }, { label: "this-week", value: "this-week" }]}
+                        options={[{ label: "This Month", value: "this-month" }, { label: "This Week", value: "this-week" }]}
                         onValueChange={(value) => {
                             setSelectedOption(value);
                         }}
                     />
 
-                    <button className="btn-primary flex items-center gap-2">
-                        <span className="text-nowrap">Today's Sync</span>
-
+                    <button className="flex items-center gap-2 px-5 py-3 rounded-xl border border-purple-200 text-[#4C1D95] font-medium hover:bg-purple-50 transition-colors">
                         <RefreshCcwIcon className="w-4 h-4" />
+                        <span className="text-nowrap">Sync</span>
+                    </button>
+
+                    <button className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white font-medium hover:shadow-lg hover:shadow-purple-500/20 transition-all">
+                        <span className="text-nowrap">Export</span>
                     </button>
                 </div>
             </div>

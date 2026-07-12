@@ -19,8 +19,8 @@ const selectTriggerVariants = cva(
       variant: {
         small: "w-full max-w-[120px] rounded-sm text-sm focus:bg-accent focus:text-accent-foreground rounded-lg",
         default: "min-w-[180px] h-10 rounded-md border border-input bg-background px-3 py-2 text-sm",
-        outline: "min-w-[180px] h-10 md:h-14 justify-center gap-2 px-4 md:px-6 py-3 md:py-4 md:rounded-2xl rounded-xl text-[#070707] font-medium text-base",
-        primary: "min-w-[180px] h-10 md:h-14 justify-center gap-2 px-4 md:px-6 py-3 md:py-4 md:rounded-2xl rounded-xl text-[#070707] font-medium text-base bg-[linear-gradient(136deg,#FFBB1C_0%,#E28611_100%)] hover:opacity-90 active:scale-[0.98] hover:shadow-lg hover:shadow-orange-500/20 border-none [&>svg]:text-[#070707]",
+        outline: "min-w-[180px] h-10 md:h-12 justify-center gap-2 px-4 md:px-5 py-3 md:py-3 rounded-xl text-[#4C1D95] font-medium text-sm border-purple-200 hover:bg-purple-50 transition-colors",
+        primary: "min-w-[180px] h-10 md:h-12 justify-center gap-2 px-4 md:px-5 py-3 md:py-3 rounded-xl text-white font-medium text-sm bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] hover:opacity-90 active:scale-[0.98] hover:shadow-lg hover:shadow-purple-500/20 border-none [&>svg]:text-white",
       },
     },
     defaultVariants: {
@@ -35,9 +35,8 @@ const selectContentVariants = cva("", {
     variant: {
         small: "w-full max-w-[200px] rounded-sm text-sm p-0",
       default: "rounded-md border bg-popover text-popover-foreground shadow-md",
-      outline: "rounded-2xl border-2 border-[#FFBB1C] bg-white p-1 shadow-xl rounded-[14px] border-2 border-[#FFBB1C] p-2",
-      // Match the primary theme: rounded corners and maybe a subtle orange border
-      primary: "rounded-2xl border-2 border-[#FFBB1C] bg-white p-1 shadow-xl rounded-[14px] border-2 border-[#FFBB1C] p-2",
+      outline: "rounded-2xl border border-purple-200 bg-white p-1 shadow-xl",
+      primary: "rounded-2xl border border-purple-200 bg-white p-1 shadow-xl",
     },
   },
   defaultVariants: {
@@ -53,8 +52,8 @@ const selectItemVariants = cva(
             small: "rounded-sm text-xs focus:bg-accent focus:text-accent-foreground p-1",
           default: "rounded-sm text-sm focus:bg-accent focus:text-accent-foreground",
           // Items should NOT have borders, only rounded corners and hover backgrounds
-          outline: "rounded-[12px] text-base font-medium text-[#070707] focus:bg-orange-50 focus:text-[#E28611]",
-          primary: "rounded-[12px] text-base font-medium text-[#070707] focus:bg-orange-50 focus:text-[#E28611]",
+          outline: "rounded-[12px] text-base font-medium text-[#2A3542] focus:bg-purple-50 focus:text-[#4C1D95]",
+          primary: "rounded-[12px] text-base font-medium text-[#2A3542] focus:bg-purple-50 focus:text-[#4C1D95]",
         },
       },
       defaultVariants: {
