@@ -16,13 +16,13 @@ export default function DashboardStats({ stats }: { stats: VendorVerificationSta
 
 
 
-        <div className='flex h-full max-w-sm flex-col gap-3 justify-between items-start flex-[1_0_0] [background:var(--Primary-Linear,linear-gradient(136deg,#FFBB1C_0%,#E28611_100%))] px-6 py-4 rounded-lg relative'>
+        <div className='flex h-full max-w-sm flex-col gap-3 justify-between items-start flex-[1_0_0] bg-[linear-gradient(136deg,#4C1D95_0%,#7C3AED_100%)] px-6 py-4 rounded-lg relative'>
           <div>
-            <h3 className='text-[color:var(--Secondary-Text,#697586)] [font-family:Inter] text-sm font-medium leading-[160%] mb-1'>Total Vendors</h3>
-            <p className='text-[#071E27] [font-family:Inter] text-4xl font-semibold leading-[124%]'>1240</p>
+            <h3 className='text-purple-200 [font-family:Inter] text-sm font-medium leading-[160%] mb-1'>Total Vendors</h3>
+            <p className='text-white [font-family:Inter] text-4xl font-semibold leading-[124%]'>1240</p>
           </div>
 
-          <p className=' text-[rgba(109,77,0,0.80)]  text-sm font-medium text-nowrap leading-5'>12% Increase from yesterday</p>
+          <p className=' text-purple-200/80 text-sm font-medium text-nowrap leading-5'>12% Increase from yesterday</p>
 
 
           <div className='absolute top-0 right-0'>
@@ -33,21 +33,21 @@ export default function DashboardStats({ stats }: { stats: VendorVerificationSta
 
 
         <StatsCard
-          color='#E28611'
+          color='#7C3AED'
           title='Total Customers'
           value={1240}
           update='May 22, 2026'
           icon={<DashboardStatsIcons.Customers />}
         />
         <StatsCard
-          color='#89A2C3'
+          color='#6D28D9'
           title='Total Active Trucks'
           value={1240}
           update='May 22, 2026'
           icon={<DashboardStatsIcons.ActiveTruck />}
         />
         <StatsCard
-          color='#E5C649'
+          color='#8B5CF6'
           title='Platform Revenue'
           value={1240}
           update='May 22, 2026'

@@ -9,7 +9,7 @@ export default function VendorDetailCard({
   data: VendorDetails;
 }) {
   return (
-    <div className="flex flex-col items-start gap-6 border border-[color:var(--background-hover-50,#ECEFF3)] [background:var(--background-disabled-0,#F8FAFB)] p-6 rounded-2xl border-solid min-w-[262px]">
+    <div className="flex flex-col items-start gap-6 border border-purple-100 bg-purple-50/30 p-6 rounded-2xl border-solid min-w-[262px]">
       {/* Profile Header */}
       <div className="flex items-center gap-5">
         <div className="relative w-[84px] h-[84px] rounded-full overflow-hidden border-2 border-white shadow-inner">

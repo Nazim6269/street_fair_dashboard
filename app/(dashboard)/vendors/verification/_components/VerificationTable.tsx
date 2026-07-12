@@ -18,7 +18,7 @@ const TickIcon = (
   >
     <path
       d="M3.79167 7.9625L0 4.17083L1.3125 2.85833L3.79167 5.3375L9.12917 0L10.4417 1.3125L3.79167 7.9625Z"
-      fill="#007070"
+      fill="#FFFFFF"
     />
   </svg>
 );
@@ -27,7 +27,7 @@ const TickIcon = (
 function DocumentBadge({ label }: { label: string }) {
   return (
     <div className="flex flex-col items-center gap-1 pl-2.5">
-      <span className="flex w-6 h-6 justify-center items-center bg-[#3AC2C2] rounded-full">
+      <span className="flex w-6 h-6 justify-center items-center bg-[#7C3AED] rounded-full">
         {TickIcon}
       </span>
       <span className="text-[#89A2C3] text-center text-[10px] font-medium leading-[120%]">
@@ -85,7 +85,7 @@ const getColumns = (): Column<VendorVerification>[] => [
       <Link
         href={`/vendors/verification/${row.verificationId}`}
       >
-        <Button className="bg-[#FFBB1C] hover:bg-[#e0a618] text-black font-bold rounded-xl px-6">
+        <Button className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold rounded-xl px-6">
           Review
         </Button>
       </Link>

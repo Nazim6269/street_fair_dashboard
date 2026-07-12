@@ -65,7 +65,7 @@ export default function ApproveDoc({ verificationId, verificationStatus }: Appro
                 </h2>
 
                 <div>
-                    <p className="self-stretch text-[color:var(--Info,#3AC2C2)] [font-family:Inter] text-xs font-normal leading-[120%] mb-1">
+                    <p className="self-stretch text-[color:var(--Primary,#7C3AED)] [font-family:Inter] text-xs font-normal leading-[120%] mb-1">
                         Decision Required
                     </p>
 
