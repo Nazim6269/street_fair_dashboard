@@ -8,11 +8,11 @@ interface Props {
 }
 
 const STATUS_CONFIG = [
-  { key: "pending", name: "Pending", color: "#f59e0b" },
-  { key: "verified", name: "Verified", color: "#a3ff71" },
-  { key: "expired", name: "Expired", color: "#38bdf8" },
-  { key: "suspended", name: "Suspended", color: "#fb7185" },
-  { key: "rejected", name: "Rejected", color: "#8fa3c1" },
+  { key: "pending", name: "Pending", color: "#8B5CF6" },
+  { key: "verified", name: "Verified", color: "#4C1D95" },
+  { key: "expired", name: "Expired", color: "#7C3AED" },
+  { key: "suspended", name: "Suspended", color: "#A78BFA" },
+  { key: "rejected", name: "Rejected", color: "#C4B5FD" },
 ] as const;
 
 const StatusTooltip = ({ active, payload }: any) => {

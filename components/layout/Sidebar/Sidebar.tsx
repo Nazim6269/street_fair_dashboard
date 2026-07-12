@@ -55,8 +55,8 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       <aside
         className={`
-          fixed inset-y-0 left-0 z-50 flex flex-col bg-[#F9F9FB]
-          border-r border-gray-200 h-full
+          fixed inset-y-0 left-0 z-50 flex flex-col bg-[#FAFAFE]
+          border-r border-purple-100 h-full
           transform transition-all duration-300 ease-in-out
           ${open ? 'translate-x-0' : '-translate-x-full'}
           ${effectiveCollapsed ? 'w-16' : 'w-70'}
@@ -71,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           onClose={onClose}
         />
 
-        <hr className={`${effectiveCollapsed ? 'mx-3' : 'mx-6'} border-gray-200`} />
+        <hr className={`${effectiveCollapsed ? 'mx-3' : 'mx-6'} border-purple-100`} />
         <div className="flex-1 overflow-y-auto overflow-x-hidden h-full">
           <SidebarMenu
             collapsed={effectiveCollapsed}

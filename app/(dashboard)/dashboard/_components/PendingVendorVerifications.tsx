@@ -18,7 +18,7 @@ export default function PendingVendorVerifications() {
       {/* Header Section */}
       <div className='flex items-center justify-between w-full p-6'>
         <h2 className="section-title">Pending Vendor Verifications</h2>
-        <button className='text-sm font-semibold text-[#FFBB1C] hover:underline'>View All</button>
+        <button className='text-sm font-semibold text-[#7C3AED] hover:underline'>View All</button>
       </div>
 
       {/* Table Header */}
@@ -50,7 +50,7 @@ export default function PendingVendorVerifications() {
     
                 {/* Action Button */}
                 <div className='flex justify-end '>
-                  <button className='px-4 py-2 rounded-xl font-medium text-[#070707] text-lg bg-gradient-to-b from-[#FFBB1C] to-[#F29D00] shadow-sm hover:opacity-90 transition-opacity'>
+                  <button className='px-4 py-2 rounded-xl font-medium text-white text-lg bg-gradient-to-b from-[#7C3AED] to-[#4C1D95] shadow-sm hover:opacity-90 transition-opacity'>
                     Review
                   </button>
                 </div>  

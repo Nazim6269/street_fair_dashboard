@@ -50,7 +50,7 @@ const CustomBar = (props: any) => {
                 y1={y}
                 x2={x + width}
                 y2={y}
-                stroke="#fdbd5e"
+                stroke="#7C3AED"
                 strokeWidth={4}
                 strokeLinecap="round"
             />
@@ -75,8 +75,8 @@ const PlatformRevenueChart = () => {
                             <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 16 }}>
                                 <defs>
                                     <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stopColor="#fdbd5e" stopOpacity={0.4} />
-                                        <stop offset="100%" stopColor="#fdbd5e" stopOpacity={0} />
+                                        <stop offset="0%" stopColor="#7C3AED" stopOpacity={0.4} />
+                                        <stop offset="100%" stopColor="#7C3AED" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
 
@@ -98,7 +98,7 @@ const PlatformRevenueChart = () => {
 
                                 <Tooltip
                                     content={<RevenueTooltip />}
-                                    cursor={{ fill: 'rgba(253,189,94,0.08)' }}
+                                    cursor={{ fill: 'rgba(124,58,237,0.08)' }}
                                 />
 
                                 <Legend
@@ -121,7 +121,7 @@ const PlatformRevenueChart = () => {
                                         position="top"
                                         offset={-30}
                                         formatter={(val) => `$${val?.toLocaleString()}`}
-                                        style={{ fill: '#b8860b', fontSize: '12px', fontWeight: 'bold' }}
+                                        style={{ fill: '#4C1D95', fontSize: '12px', fontWeight: 'bold' }}
                                     />
                                 </Bar>
                             </BarChart>

@@ -1,5 +1,4 @@
 import { ChevronLeft, X } from 'lucide-react';
-import Image from 'next/image';
 
 interface SidebarHeaderProps {
   collapsed: boolean;
@@ -19,10 +18,9 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({
   return (
     <div className={`pt-10 pb-6 flex items-center justify-between ${collapsed ? 'px-3' : 'px-6'} shrink-0`}>
       {!collapsed && (
-        <Image src="/images/sidebar-logo.png" alt="logo" width={135} height={35} />
+        <h1 className="text-xl font-bold text-[#4C1D95] font-[Lora]">StreetFood</h1>
       )}
 
-      {/* Mobile: X close button */}
       {isMobile && onClose && (
         <button
           onClick={onClose}
@@ -33,7 +31,6 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({
         </button>
       )}
 
-      {/* Desktop: collapse toggle button */}
       {!isMobile && showCollapseButton && (
         <button
           onClick={onToggleCollapse}

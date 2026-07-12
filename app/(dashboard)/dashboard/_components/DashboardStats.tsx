@@ -13,28 +13,28 @@ export default function DashboardStats({ summary }: { summary: DashboardSummary 
       <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
 
         <StatsCard
-          color='#2CC1C1'
+          color='#7C3AED'
           title='Total Vendors'
           value={summary?.totalVendors || 0}
           update='May 22, 2026'
           icon={<DashboardStatsIcons.Vendors/>} 
         />
           <StatsCard
-          color='#E28611'
+          color='#4C1D95'
           title='Total Customers'
           value={summary?.totalCustomers || 0}
           update='May 22, 2026'
           icon={<DashboardStatsIcons.Customers/>} 
         />
         <StatsCard
-          color='#89A2C3'
+          color='#6D28D9'
           title='Total Active Trucks'
           value={summary?.activeTrucksToday || 0}
           update='May 22, 2026'
           icon={<DashboardStatsIcons.ActiveTruck/>} 
         />
         <StatsCard
-          color='#E5C649'
+          color='#8B5CF6'
           title='Platform Revenue'
           value={summary?.platformRevenue || 0}
           update='May 22, 2026'

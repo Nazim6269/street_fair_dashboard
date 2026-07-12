@@ -4,19 +4,19 @@ import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
 
 const salesData = [
-  { name: 'Jane Cooper', value: 98450, color: '#31C48D' },
-  { name: 'Esther Howard', value: 42300, color: '#8fa3c1' },
-  { name: 'Leslie Alexander', value: 28700, color: '#8fa3c1' },
-  { name: 'Guy Hawkins', value: 15200, color: '#8fa3c1' },
-  { name: 'Robert Fox', value: 8900, color: '#8fa3c1' },
+  { name: 'Jane Cooper', value: 98450, color: '#7C3AED' },
+  { name: 'Esther Howard', value: 42300, color: '#A78BFA' },
+  { name: 'Leslie Alexander', value: 28700, color: '#C4B5FD' },
+  { name: 'Guy Hawkins', value: 15200, color: '#DDD6FE' },
+  { name: 'Robert Fox', value: 8900, color: '#EDE9FE' },
 ];
 
 const revenueData = [
-  { name: 'Jane Cooper', value: 121799, color: '#31C48D' },
-  { name: 'Esther Howard', value: 50799, color: '#8fa3c1' },
-  { name: 'Leslie Alexander', value: 25567, color: '#8fa3c1' },
-  { name: 'Guy Hawkins', value: 5789, color: '#8fa3c1' },
-  { name: 'Robert Fox', value: 1789, color: '#8fa3c1' },
+  { name: 'Jane Cooper', value: 121799, color: '#7C3AED' },
+  { name: 'Esther Howard', value: 50799, color: '#A78BFA' },
+  { name: 'Leslie Alexander', value: 25567, color: '#C4B5FD' },
+  { name: 'Guy Hawkins', value: 5789, color: '#DDD6FE' },
+  { name: 'Robert Fox', value: 1789, color: '#EDE9FE' },
 ];
 
 export default function TopVendors() {
@@ -54,14 +54,14 @@ export default function TopVendors() {
         <div className="flex bg-gray-100 p-1 rounded-xl gap-1">
           <button
             onClick={() => setActiveTab('sales')}
-            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'sales' ? 'bg-[#FFBB1C] text-black shadow-sm' : 'text-gray-500'
+            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'sales' ? 'bg-[#7C3AED] text-white shadow-sm' : 'text-gray-500'
               }`}
           >
             By Sales
           </button>
           <button
             onClick={() => setActiveTab('revenue')}
-            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'revenue' ? 'bg-[#FFBB1C] text-black shadow-sm' : 'text-gray-500'
+            className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${activeTab === 'revenue' ? 'bg-[#7C3AED] text-white shadow-sm' : 'text-gray-500'
               }`}
           >
             By Revenue
@@ -80,7 +80,7 @@ export default function TopVendors() {
                   {/* Label Row */}
                   <div className="flex justify-between items-center text-sm">
                     <span className="font-medium text-slate-500">{item.name}</span>
-                    <span className={`font-medium ${index === 0 ? 'text-[#31C48D]' : 'text-slate-500'}`}>
+                    <span className={`font-medium ${index === 0 ? 'text-[#7C3AED]' : 'text-slate-500'}`}>
                       {
                         activeTab === 'sales' ? `${item.value.toLocaleString()} orders` : `$${item.value.toLocaleString()}`
                       }

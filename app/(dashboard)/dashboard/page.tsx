@@ -21,7 +21,7 @@ export default function DashboardPage() {
             {/* Header Section */}
             <div className="flex md:flex-row flex-col md:items-center md:justify-between gap-6">
                 {/* Left Side - Welcome Text */}
-                <PageTitle title="Welcome, Sedric Stewart 👋" description="Manage your platform data, operational health and vendor ecosystem status." />
+                <PageTitle title="Welcome, Nazim uddin 👋" description="Manage your platform data, operational health and vendor ecosystem status." />
 
                 {/* Right Side - Action Buttons */}
                 <div className="flex items-center gap-4">
@@ -98,10 +98,10 @@ const DashboardAlerts = ({ alerts }: { alerts: DashboardAlerts | undefined }) =>
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 border border-solid  bg-white shadow-[0_2px_20px_0_rgba(0,0,0,0.10)] p-4 rounded-2xl">
-            <HeaderNotifyCard icon={<HeaderNotifyIcons.Issue />} title={`${alerts?.issuesNeedAttention || 0} Issue needs attention`} color="#F9DD8E" />
-            <HeaderNotifyCard icon={<HeaderNotifyIcons.Onboarding />} title={`${alerts?.pendingOnboarding || 0} Onboarding pending`} color="#FCEFC9" />
-            <HeaderNotifyCard icon={<HeaderNotifyIcons.Inactive />} title={`${alerts?.inactiveVendors || 0} Inactive vendor`} color="#FEFAEC" />
-            <HeaderNotifyCard icon={<HeaderNotifyIcons.Revenue />} title={`${alerts?.todayRevenue || 0} Revenue updated: ${alerts?.currency || ''}`} color="#ECEFF3" />
+            <HeaderNotifyCard icon={<HeaderNotifyIcons.Issue />} title={`${alerts?.issuesNeedAttention || 0} Issue needs attention`} color="#DDD6FE" />
+            <HeaderNotifyCard icon={<HeaderNotifyIcons.Onboarding />} title={`${alerts?.pendingOnboarding || 0} Onboarding pending`} color="#EDE9FE" />
+            <HeaderNotifyCard icon={<HeaderNotifyIcons.Inactive />} title={`${alerts?.inactiveVendors || 0} Inactive vendor`} color="#F5F3FF" />
+            <HeaderNotifyCard icon={<HeaderNotifyIcons.Revenue />} title={`${alerts?.todayRevenue || 0} Revenue updated: ${alerts?.currency || ''}`} color="#E8E0F5" />
         </div>
     );
 };

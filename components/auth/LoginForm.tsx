@@ -112,7 +112,7 @@ function LoginFormFields({
       <button
         type="submit"
         disabled={isLoading}
-        className="btn-primary disabled:cursor-not-allowed"
+        className="btn-primary disabled:cursor-not-allowed bg-[linear-gradient(136deg,#4C1D95_0%,#7C3AED_100%)] hover:shadow-purple-600/30"
       >
         {isLoading ? (
           <div className="flex items-center gap-2 text-gray-800">
@@ -144,37 +144,23 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="">
-      <div className="flex min-w-[380px] flex-col items-center gap-[60px] rounded-3xl [background:var(--Opacity-Dark-05,rgba(8,14,30,0.05))] p-5 md:min-w-[600px] md:p-10">
-        <div className="flex w-full max-w-[440px] flex-col items-center gap-[40px]">
-          <div className="mx-auto w-full max-w-[100px] md:max-w-[150px]">
-            <Image
-              src="/images/atliss-logo.png"
-              alt="logo"
-              width={100}
-              height={100}
-              className="mx-auto"
-            />
-          </div>
+    <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+      <div className="flex flex-col items-center gap-8">
+        <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora]">StreetFood</h1>
 
-          <Form<LoginFormValues>
-            schema={loginSchema}
-            defaultValues={defaultValues}
-            onSubmit={onSubmit}
-            className="w-full space-y-4"
-          >
-            <LoginFormFields isLoading={isLoading} submitError={submitError} />
-          </Form>
-        </div>
+        <Form<LoginFormValues>
+          schema={loginSchema}
+          defaultValues={defaultValues}
+          onSubmit={onSubmit}
+          className="w-full space-y-4"
+        >
+          <LoginFormFields isLoading={isLoading} submitError={submitError} />
+        </Form>
+      </div>
 
-        <div className="flex w-full items-center justify-between">
-          <p className="text-right text-base font-normal leading-[160%] text-[#697586] [font:Inter]">
-            Privacy Policy
-          </p>
-          <p className="text-right text-base font-normal leading-[160%] text-[#697586] [font:Inter]">
-            Copyright 2026
-          </p>
-        </div>
+      <div className="mt-8 flex w-full items-center justify-between">
+        <p className="text-sm text-[#697586]">Privacy Policy</p>
+        <p className="text-sm text-[#697586]">Copyright 2026</p>
       </div>
     </div>
   );

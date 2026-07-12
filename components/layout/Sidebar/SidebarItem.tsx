@@ -50,11 +50,11 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   //  px-5 py-3 rounded-xl
   const baseClass = `
     flex items-center gap-3 w-full text-left pl-5 pr-5 py-3 rounded-xl text-sm text-nowrap
-    transition-colors duration-150 cursor-pointer
+    transition-all duration-200 cursor-pointer
     ${collapsed ? 'justify-center px-2' : ''}
     ${isActive || isChildActive
-      ? '[background:var(--Primary-Linear,linear-gradient(136deg,#FFBB1C_0%,#E28611_100%))]  font-medium hover:bg-primary-linear/80 text-black font-medium '
-      : 'text-gray-600 hover:bg-gray-200 hover:text-gray-900'
+      ? 'bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] text-white font-medium shadow-md shadow-purple-500/20'
+      : 'text-gray-600 hover:bg-purple-50 hover:text-[#4C1D95]'
     }
   `;
 
@@ -163,12 +163,11 @@ const ChildItem: React.FC<ChildItemProps> = ({ label, href, isActive }) => {
     <Link
       href={href}
       className={`
-        relative flex items-center py-2 pl-6 text-sm transition-colors duration-150
-        ${isActive ? 'text-gray-800 font-semibold' : 'text-gray-600 hover:text-gray-800'}
+        relative flex items-center py-2 pl-6 text-sm transition-colors duration-200
+        ${isActive ? 'text-[#4C1D95] font-semibold' : 'text-gray-600 hover:text-[#4C1D95]'}
         before:absolute before:left-0 before:top-1/3
         before:-translate-y-1/2 before:w-5 before:h-4
-        before:border-l before:border-b before:border-gray-600
-        // before:rounded-bl-md
+        before:border-l before:border-b before:border-purple-300
       `}
     >
       {label}
@@ -185,9 +184,9 @@ const ProfileItem = () => {
       </div>
 
       <div>
-        <p className='text-[color:var(--Button-text,#070707)] [font-family:Inter] text-sm font-medium leading-[160%]'>Sedric Stewart</p>
+        <p className='text-[color:var(--Button-text,#070707)] [font-family:Inter] text-sm font-medium leading-[160%]'>Nazim uddin</p>
 
-        <p className='inline-flex justify-center items-center gap-2 [background:var(--Mid-Orange,#FFCD71)] px-1.5 py-0 rounded-3xl text-[color:var(--Button-text,#070707)] [font-family:Inter] text-[10px] font-normal leading-4 tracking-[-0.5px]'>Admin</p>
+        <p className='inline-flex justify-center items-center gap-2 bg-purple-100 px-1.5 py-0 rounded-3xl text-[#4C1D95] [font-family:Inter] text-[10px] font-normal leading-4 tracking-[-0.5px]'>Admin</p>
       </div>
     </div>
   );

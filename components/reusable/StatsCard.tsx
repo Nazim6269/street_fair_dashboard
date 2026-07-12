@@ -19,7 +19,7 @@ interface StatsCardProps {
           <div className={`absolute left-0 top-1/2 -translate-y-1/2 h-[75%] w-1 rounded-r-sm`} style={{ backgroundColor: color }} />
   
           {/* Icon Container */}
-          <div className="flex flex-col items-center justify-center rounded-full [background:var(--Primary-Linear,linear-gradient(136deg,#FFBB1C_0%,#E28611_100%))] p-2.5">
+          <div className="flex flex-col items-center justify-center rounded-full bg-[linear-gradient(136deg,#4C1D95_0%,#7C3AED_100%)] p-2.5">
             {icon}
           </div>
   
