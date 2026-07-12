@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import DataTable, { Column } from "@/components/reusable/table/DataTable";
-import { Eye, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import TableToolBar from "@/components/reusable/table/TableToolBar";
 import ActionIcons from "@/components/icons/ActionIcons";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 
 // 1. Define Types
 type Vendor = {
@@ -91,7 +91,9 @@ const StatusBadge = ({ status }: { status: Vendor['status'] }) => {
 
 // 4. Main Table Component
 export default function CustomerManagementTable() {
-    // Dummy Data
+    const [statusFilter, setStatusFilter] = useState("all");
+    const [sortBy, setSortBy] = useState("newest");
+
     const data: Vendor[] = [
         { CustomerId: "834759", customerName: "David John", customerEmail: "david.john@example.com", status: "active", date_joined: "May 10, 2026", orders_count: 10, total_spent: 100.00 },
         { CustomerId: "834754", customerName: "David John", customerEmail: "david.john@example.com", status: "reported", date_joined: "May 10, 2026", orders_count: 10, total_spent: 140.00 },
@@ -122,30 +124,36 @@ export default function CustomerManagementTable() {
 
 
                     <div className="flex items-center gap-4">
-
-
-                        {/* Sort by */}
-                        <div>
-
-                            <label className="text-[#697586] text-sm font-normal leading-[160%]" htmlFor="status">Status:</label>
-
-                            <select className=" rounded-md p-1 text-[#2A3542] text-sm font-semibold leading-[160%] hover:bg-gray-50" id="status">
-                                <option value="all"> All</option>
-                                <option> Completed</option>
-                                <option> Cancelled</option>
-                                <option> Incomplete</option>
-                            </select>
+                        <div className="flex items-center gap-2">
+                            <label className="text-[#697586] text-sm font-normal leading-[160%]">Status:</label>
+                            <GenericDropDown
+                                options={[
+                                    { label: "All", value: "all" },
+                                    { label: "Active", value: "active" },
+                                    { label: "Reported", value: "reported" },
+                                    { label: "Suspended", value: "suspended" },
+                                ]}
+                                value={statusFilter}
+                                onValueChange={(value) => setStatusFilter(value.toString())}
+                                variant="light"
+                                size="sm"
+                                radius="sm"
+                            />
                         </div>
 
-                        {/* Sort by */}
-                        <div>
-
-                            <label className="text-[#697586] text-sm font-normal leading-[160%]" htmlFor="sort">Sort by:</label>
-
-                            <select className=" rounded-md p-1 text-[#2A3542] text-sm font-semibold leading-[160%] hover:bg-gray-50" id="sort">
-                                <option> Newest First</option>
-                                <option> Oldest First</option>
-                            </select>
+                        <div className="flex items-center gap-2">
+                            <label className="text-[#697586] text-sm font-normal leading-[160%]">Sort by:</label>
+                            <GenericDropDown
+                                options={[
+                                    { label: "Newest First", value: "newest" },
+                                    { label: "Oldest First", value: "oldest" },
+                                ]}
+                                value={sortBy}
+                                onValueChange={(value) => setSortBy(value.toString())}
+                                variant="light"
+                                size="sm"
+                                radius="sm"
+                            />
                         </div>
                     </div>
                 </TableToolBar>

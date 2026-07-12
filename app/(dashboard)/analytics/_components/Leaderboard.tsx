@@ -2,10 +2,13 @@
 "use client"
 import { ReusableTabs } from '@/components/reusable/CustomTabs';
 import React, { useState } from 'react'
+import GenericDropDown from '@/components/common/generic-dropdown/GenericDropdown';
 
 export default function Leaderboard() {
 
     const [selectedTab, setSelectedTab] = useState('customers');
+    const [selectedYear, setSelectedYear] = useState("this-year");
+
     return (
         <div className='w-full flex-col gap-4 self-stretch border border-[#ECEFF3] [background:var(--text-0,#FFF)] shadow-[0_0_16px_0_rgba(0,0,0,0.06)]   rounded-[10px] border-solid'>
             <div className="mb-4 flex items-center justify-between p-6">
@@ -15,17 +18,21 @@ export default function Leaderboard() {
                     </h3>
                 </div>
 
-                <button className="flex h-[46px] items-center gap-2 rounded-xl bg-white px-4  font-medium text-[#202332] shadow-[0_8px_24px_rgba(16,24,40,0.08)]">
-                    <select>
-                        <option value="this year">This year</option>
-                        <option value="last year">Last year</option>
-                        <option value="2025">2025</option>
-                        <option value="2024">2024</option>
-                        <option value="2023">2023</option>
-                        <option value="2022">2022</option>
-                    </select>
-                    {/* <ChevronDown className="h-4 w-4" /> */}
-                </button>
+                <GenericDropDown
+                    options={[
+                        { label: "This year", value: "this-year" },
+                        { label: "Last year", value: "last-year" },
+                        { label: "2025", value: "2025" },
+                        { label: "2024", value: "2024" },
+                        { label: "2023", value: "2023" },
+                        { label: "2022", value: "2022" },
+                    ]}
+                    value={selectedYear}
+                    onValueChange={(value) => setSelectedYear(value.toString())}
+                    variant="light"
+                    size="sm"
+                    radius="sm"
+                />
             </div>
             {/* tabs */}
             <div>
@@ -45,7 +52,7 @@ export default function Leaderboard() {
                 {
                     selectedTab === 'customers' && (
                         <div>
-                        <TopPerformersCard />
+                        <TopPerformersCard data={winners} />
                     </div>
                 )}
                     
@@ -53,7 +60,7 @@ export default function Leaderboard() {
                     {
                         selectedTab === 'vendors' && (
                             <div>
-                                <h3>Vendors</h3>
+                                <TopPerformersCard data={vendorWinners} />
                             </div>
                         )
                     }
@@ -89,13 +96,37 @@ const winners = [
   },
 ];
 
-function TopPerformersCard() {
+const vendorWinners = [
+  {
+    rank: 2,
+    name: "Taco Truck Co",
+    orders: "9,2150",
+    image: "/NoImage.jpeg",
+    size: "small",
+  },
+  {
+    rank: 1,
+    name: "Burger Palace",
+    orders: "15,3400",
+    image: "/NoImage.jpeg",
+    size: "large",
+  },
+  {
+    rank: 3,
+    name: "Pizza Corner",
+    orders: "6,8700",
+    image: "/NoImage.jpeg",
+    size: "small",
+  },
+];
+
+function TopPerformersCard({ data }: { data: typeof winners }) {
   return (
     <div className="object-cover overflow-hidden  bg-purple-50 px-6   h-[340px]">
 
 
       <div className="grid grid-cols-3 items-end gap-6 h-full overflow-hidden">
-        {winners.map((item) => {
+        {data.map((item) => {
           const isFirst = item.rank === 1;
 
           return (

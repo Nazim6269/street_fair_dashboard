@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
   TooltipProps,
 } from "recharts";
-import { ChevronDown } from "lucide-react";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 
 const data = [
   { month: "Jan", Vendor: 0.35, Customer: 2.85 },
@@ -47,9 +47,10 @@ function CustomTooltip({ active, payload }: TooltipProps<number, string> & { pay
 }
 
 export default function PlatformGrowthChart() {
+  const [selectedYear, setSelectedYear] = useState("this-year");
+
   return (
     <div className="w-full rounded-[24px] border border-[#E9EEF5] bg-white px-8 py-7 shadow-sm">
-      {/* Header */}
       <div className="mb-8 flex items-start justify-between">
         <div>
           <h3 className="section-title">
@@ -73,17 +74,21 @@ export default function PlatformGrowthChart() {
           </div>
         </div>
 
-        <button className="hidden sm:flex h-[46px] items-center gap-2 rounded-xl bg-white px-5 text-base font-medium text-[#202332] shadow-[0_8px_24px_rgba(16,24,40,0.08)]">
-          <select>
-            <option value="this year">This year</option>
-            <option value="last year">Last year</option>
-            <option value="2025">2025</option>
-            <option value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-          </select>
-          {/* <ChevronDown className="h-4 w-4" /> */}
-        </button>
+        <GenericDropDown
+          options={[
+            { label: "This year", value: "this-year" },
+            { label: "Last year", value: "last-year" },
+            { label: "2025", value: "2025" },
+            { label: "2024", value: "2024" },
+            { label: "2023", value: "2023" },
+            { label: "2022", value: "2022" },
+          ]}
+          value={selectedYear}
+          onValueChange={(value) => setSelectedYear(value.toString())}
+          variant="light"
+          size="sm"
+          radius="sm"
+        />
       </div>
 
       {/* Chart */}

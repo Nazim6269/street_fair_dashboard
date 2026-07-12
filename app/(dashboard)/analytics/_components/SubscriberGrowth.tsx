@@ -1,9 +1,10 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
+import GenericDropDown from '@/components/common/generic-dropdown/GenericDropdown';
 
 // Mock Data matching your structure
 const data = [
@@ -22,17 +23,23 @@ const data = [
 ];
 
 export default function SubscriberGrowth() {
+    const [selectedPeriod, setSelectedPeriod] = useState("this-year");
+
     return (
         <div className="bg-white p-6 rounded-2xl border border-[#ECEFF3] shadow-sm">
-            {/* Header */}
             <div className="flex justify-between items-start mb-8">
                 <div>
                     <h2 className="section-title">Subscriber Growth</h2>
                     <p className="text-sm text-[#697586]">New subscribers over the last 7 days</p>
                 </div>
-                <select className="border border-gray-200 rounded-lg px-3 py-1 text-sm font-medium outline-none">
-                    <option>This year</option>
-                </select>
+                <GenericDropDown
+                    options={[{ label: "This Year", value: "this-year" }]}
+                    value={selectedPeriod}
+                    onValueChange={(value) => setSelectedPeriod(value.toString())}
+                    variant="light"
+                    size="sm"
+                    radius="sm"
+                />
             </div>
 
             {/* Chart */}
