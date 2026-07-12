@@ -15,10 +15,11 @@ type DataTableProps<T> = {
     columns: Column<T>[];
     data: T[];
     pageSize?: number;
-    toolbar?: React.ReactNode; // Inject custom search/filter UI
-    selectedId?: string | null; // Changed to single string
+    toolbar?: React.ReactNode;
+    selectedId?: string | null;
     onSelectionChange?: (id: string | null) => void;
     idKey?: keyof T;
+    emptyMessage?: string;
 };
 
 export default function DataTable<T>({
@@ -28,7 +29,8 @@ export default function DataTable<T>({
     toolbar,
     selectedId,
     onSelectionChange,
-    idKey
+    idKey,
+    emptyMessage = "No data found"
 }: DataTableProps<T>) {
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = Math.ceil(data.length / pageSize);
@@ -69,7 +71,14 @@ export default function DataTable<T>({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                    {paginatedData.map((row, i) => {
+                    {paginatedData.length === 0 ? (
+                        <TableRow>
+                            <TableCell colSpan={columns.length} className="text-center py-12">
+                                <p className="text-[#697586] text-sm">{emptyMessage}</p>
+                            </TableCell>
+                        </TableRow>
+                    ) : (
+                    paginatedData.map((row, i) => {
                     const rowId = String(row[idKey!]);
                     const isSelected = selectedId === rowId;
                     
@@ -79,7 +88,6 @@ export default function DataTable<T>({
                             onClick={() => handleRowClick(rowId)}
                             className={isSelected ? "bg-blue-50 hover:bg-blue-50 cursor-pointer" : "cursor-pointer"}
                         >
-                            {/*  */}
                             {columns.map((col, j) => (
                                 <TableCell key={j}>
                                     {col.cell ? col.cell(row) : String(row[col.accessor!])}
@@ -87,7 +95,8 @@ export default function DataTable<T>({
                             ))}
                         </TableRow>
                     );
-                })}
+                })
+                    )}
                     </TableBody>
                 </Table>
             </div>

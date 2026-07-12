@@ -1,8 +1,8 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { ChevronDown } from 'lucide-react';
 import { RevenueChartItem, RevenueChart as RevenueChartType } from '@/types/vendorAccount.types';
+import GenericDropDown from '@/components/common/generic-dropdown/GenericDropdown';
 
 
 const CustomTooltip = ({ active, payload }: any) => {
@@ -19,8 +19,7 @@ const CustomTooltip = ({ active, payload }: any) => {
 export default function RevenueChart({ revenueChart }: { revenueChart: RevenueChartType }) {
  console.log("revenueChart", revenueChart);
  const { range, total, currency, items } = revenueChart || {};
- 
-
+ const [selectedPeriod, setSelectedPeriod] = useState("this-year");
 
  const data = items?.map((item: RevenueChartItem) => ({
   day: item.label,
@@ -36,12 +35,14 @@ export default function RevenueChart({ revenueChart }: { revenueChart: RevenueCh
         <h2 className="section-title">
           Revenue <span className="font-medium text-slate-500 text-base">(Jan, 2026)</span>
         </h2>
-        <select className='text-sm text-orange-500'>
-            {/* <option value="this month ">This month</option>
-            <option value="last month">Last month</option> */}
-            <option value="this year">This year</option>
-            {/* <option value="last year">Last year</option> */}
-        </select>
+        <GenericDropDown
+          options={[{ label: "This Year", value: "this-year" }]}
+          value={selectedPeriod}
+          onValueChange={(value) => setSelectedPeriod(value.toString())}
+          variant="light"
+          size="sm"
+          radius="sm"
+        />
       </div>
 
       {/* 2. Recharts Area Chart */}

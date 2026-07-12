@@ -3,13 +3,9 @@ import ActionIcons from "@/components/icons/ActionIcons";
 import CustomModal from "@/components/reusable/CustomModal";
 import DataTable, { Column } from "@/components/reusable/table/DataTable";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
-import { ArrowRight, CheckIcon, EyeIcon, } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import ViewDoc from "@/app/(dashboard)/vendors/verification/[rid]/_components/ViewDoc";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 
 
 // 1. Define the Vendor type based on your data structure
@@ -91,41 +87,35 @@ const data: Document[] = [
 
 // 3. Usage in your Page
 export default function DocumentInfoTable() {
-
-
-    // const [review, setReview] = useState<Document | null>(null);
     const [view, setView] = useState<Document | null>(null);
-
-
+    const [sortBy, setSortBy] = useState("newest");
 
     const handleView = (document: Document) => {
-
         setView(document);
     };
 
-
-
     return (
         <div className="">
-
             <div className="border-x border-t rounded-t-2xl rounded-b-none bg-white p-6">
-
-                <div className="flex justify-between items-center self-stretch w-full" >
+                <div className="flex justify-between items-center self-stretch w-full">
                     <h2 className="section-title">Document Information</h2>
-                    <div>
-
-                        <label className="text-[#697586] text-sm font-normal leading-[160%]" htmlFor="sort">Sort by:</label>
-
-                        <select className=" rounded-md p-1 text-[#2A3542] text-sm font-semibold leading-[160%] hover:bg-gray-50" id="sort">
-                            <option> Newest First</option>
-                            <option> Oldest First</option>
-                        </select>
+                    <div className="flex items-center gap-2">
+                        <label className="text-[#697586] text-sm font-normal leading-[160%]">Sort by:</label>
+                        <GenericDropDown
+                            options={[
+                                { label: "Newest First", value: "newest" },
+                                { label: "Oldest First", value: "oldest" },
+                            ]}
+                            value={sortBy}
+                            onValueChange={(value) => setSortBy(value.toString())}
+                            variant="light"
+                            size="sm"
+                            radius="sm"
+                        />
                     </div>
-
-
                 </div>
             </div>
-            <DataTable columns={getColumns(handleView)} data={data} />
+            <DataTable columns={getColumns(handleView)} data={data} emptyMessage="No documents found." />
 
 
             <CustomModal

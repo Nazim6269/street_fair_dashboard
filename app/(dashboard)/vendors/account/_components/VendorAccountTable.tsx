@@ -10,7 +10,7 @@ import { BadgeCheck, BanIcon, CircleX, ClockIcon, TicketIcon, XIcon } from "luci
 import { LoadingBoundaryProvider } from "next/dist/client/components/layout-router";
 import Link from "next/link";
 import { VendorListData } from "@/types/vendorAccount.types";
-import { SimpleJsonBox } from "@/lib/SimpleJsonBox";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 
 // 1. Updated Vendor type to match the data needed for badges
 type Vendor = {
@@ -80,35 +80,40 @@ const getColumns = (): Column<Vendor>[] => [
 export default function VendorAccountTable({ vendorListData }: { vendorListData: VendorListData | undefined }) {
     console.dir(vendorListData, { depth: null });
     const items = vendorListData?.items || [];
+    const [statusFilter, setStatusFilter] = useState("all");
+    const [sortBy, setSortBy] = useState("newest");
+
     return (
         <div className="bg-white rounded-2xl border border-[#ECEFF3]">
-
-            {/* <SimpleJsonBox data={items} /> */}
             <div className="p-6 flex justify-between items-center border-b border-[#ECEFF3]">
                 <h2 className="text-xl font-semibold">Vendor Accounts</h2>
                 <div className="flex items-center gap-6">
-                    <div className="flex items-center  ">
+                    <div className="flex items-center gap-2">
                         <span className="text-sm text-[#697586]">Status:</span>
-                        <select className="text-sm font-semibold p-1 outline-none rounded-lg text-center">
-                            <option className="" value="all">All</option>
-                            {/* <option value="verified">Verified</option>
-                            <option value="suspended">Suspended</option>
-                            <option value="expired">Expired</option>
-                            <option value="inactive">Inactive</option> */}
-
-                        </select>
+                        <GenericDropDown
+                            options={[{ label: "All", value: "all" }]}
+                            value={statusFilter}
+                            onValueChange={(value) => setStatusFilter(value.toString())}
+                            variant="light"
+                            size="sm"
+                            radius="sm"
+                        />
                     </div>
-
 
                     <div className="flex items-center gap-2">
                         <span className="text-sm text-[#697586]">Sort by:</span>
-                        <select className="text-sm font-semibold p-1 outline-none">
-                            <option>Newest First</option>
-                        </select>
+                        <GenericDropDown
+                            options={[{ label: "Newest First", value: "newest" }]}
+                            value={sortBy}
+                            onValueChange={(value) => setSortBy(value.toString())}
+                            variant="light"
+                            size="sm"
+                            radius="sm"
+                        />
                     </div>
                 </div>
             </div>
-            <DataTable columns={getColumns()} data={items as Vendor[]} />
+            <DataTable columns={getColumns()} data={items as Vendor[]} emptyMessage="No vendor accounts found." />
         </div>
     );
 }

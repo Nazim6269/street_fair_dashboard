@@ -2,10 +2,12 @@
 
 import EmptyState from "@/components/reusable/EmptyState";
 import DataTable, { Column } from "@/components/reusable/table/DataTable";
-import { Button } from "@/components/ui/button";
+import GenericButton from "@/components/common/generic-button/GenericButton";
+import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
 import Link from "next/link";
 import { VendorVerification } from "@/types/vendor.types";
 import { VendorVerificationList } from "@/types/vendor.types";
+import { useState } from "react";
 
 // Tick icon
 const TickIcon = (
@@ -85,9 +87,13 @@ const getColumns = (): Column<VendorVerification>[] => [
       <Link
         href={`/vendors/verification/${row.verificationId}`}
       >
-        <Button className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold rounded-xl px-6">
-          Review
-        </Button>
+        <GenericButton
+          title="Review"
+          variant="violet"
+          size="small"
+          align="center"
+          className="px-6"
+        />
       </Link>
     ),
   },
@@ -100,46 +106,44 @@ interface Props {
 export default function PendingApplicationsPage({
   data,
 }: Props) {
+  const [sortBy, setSortBy] = useState("newest");
+  const hasData = data?.items && data.items.length > 0;
+
   return (
     <div>
-      {data?.items?.length === 0 ? (
-        <EmptyState
-          title="No vendor applications found"
-          description="Please try again later"
-        />
-      ) : (
-        <>
-          <div className="border-x border-t rounded-t-2xl bg-white p-6">
-            <div className="flex justify-between items-center w-full">
-              <h2 className="section-title">
-                Pending Vendor Applications
-              </h2>
+      <div className="border-x border-t rounded-t-2xl bg-white p-6">
+        <div className="flex justify-between items-center w-full">
+          <h2 className="section-title">
+            Pending Vendor Applications
+          </h2>
 
-              <div>
-                <label
-                  className="text-[#697586] text-sm"
-                  htmlFor="sort"
-                >
-                  Sort by:
-                </label>
-
-                <select
-                  className="rounded-md p-1 text-[#2A3542] text-sm font-semibold hover:bg-gray-50"
-                  id="sort"
-                >
-                  <option>Newest First</option>
-                  <option>Oldest First</option>
-                </select>
-              </div>
-            </div>
+          <div className="flex items-center gap-2">
+            <label
+              className="text-[#697586] text-sm"
+            >
+              Sort by:
+            </label>
+            <GenericDropDown
+              options={[
+                { label: "Newest First", value: "newest" },
+                { label: "Oldest First", value: "oldest" },
+              ]}
+              value={sortBy}
+              onValueChange={(value) => setSortBy(value.toString())}
+              placeholder="Sort by"
+              variant="light"
+              size="sm"
+              radius="sm"
+            />
           </div>
+        </div>
+      </div>
 
-          <DataTable
-            columns={getColumns()}
-            data={data?.items ?? []}
-          />
-        </>
-      )}
+      <DataTable
+        columns={getColumns()}
+        data={data?.items ?? []}
+        emptyMessage="No vendor applications found. Please try again later."
+      />
     </div>
   );
 }
