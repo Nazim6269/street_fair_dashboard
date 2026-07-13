@@ -3,11 +3,25 @@ export default function AppPromo() {
     <section id="mobile-app" className="bg-[#F9FAFB] py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="items-center gap-12 lg:grid lg:grid-cols-2">
-          <div className="flex justify-center">
-            <div className="flex h-[400px] w-[280px] items-center justify-center overflow-hidden rounded-[2rem] bg-white shadow-lg">
+          <div className="relative flex items-center justify-center py-10">
+            <div className="relative h-[420px] w-[280px] overflow-hidden rounded-[2rem] bg-white shadow-2xl">
               <img
-                src="/image.png"
+                src="/Device 13PM.png"
                 alt="StreetFair mobile app preview"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute -right-4 top-4 h-[200px] w-[140px] overflow-hidden rounded-2xl bg-white shadow-xl sm:-right-8 sm:top-8 sm:h-[240px] sm:w-[160px]">
+              <img
+                src="/Screen 1.png"
+                alt="StreetFair screen"
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="absolute -left-4 bottom-4 h-[180px] w-[130px] overflow-hidden rounded-2xl bg-white shadow-xl sm:-left-8 sm:bottom-8 sm:h-[220px] sm:w-[150px]">
+              <img
+                src="/Place your Design.png"
+                alt="StreetFair design preview"
                 className="h-full w-full object-cover"
               />
             </div>
