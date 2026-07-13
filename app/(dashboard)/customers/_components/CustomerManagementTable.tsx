@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import DataTable, { Column } from "@/components/reusable/table/DataTable";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import TableToolBar from "@/components/reusable/table/TableToolBar";
 import ActionIcons from "@/components/icons/ActionIcons";
 import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
+import { GenericSearch } from "@/components/common/generic-search/GenericSearch";
+import { SearchResult } from "@/types/searchType";
 
 // 1. Define Types
 type Vendor = {
@@ -18,7 +19,7 @@ type Vendor = {
     date_joined: string;
     orders_count: number;
     total_spent: number;
-};
+} & SearchResult;
 
 // 2. Column Definitions
 const getColumns = (): Column<Vendor>[] => [
@@ -87,41 +88,88 @@ const StatusBadge = ({ status }: { status: Vendor['status'] }) => {
     return <span className={cn("px-4 py-2 rounded-lg text-sm font-semibold leading-[130%] uppercase", styles[status])}>{status}</span>;
 };
 
-
+const allCustomers: Vendor[] = [
+    { CustomerId: "834759", customerName: "David John", customerEmail: "david.john@example.com", status: "active", date_joined: "May 10, 2026", orders_count: 10, total_spent: 100.00, id: "834759", label: "David John" },
+    { CustomerId: "834754", customerName: "David John", customerEmail: "david.john@example.com", status: "reported", date_joined: "May 10, 2026", orders_count: 10, total_spent: 140.00, id: "834754", label: "David John" },
+    { CustomerId: "834454", customerName: "Rowan Fox", customerEmail: "skylar.kai@example.com", status: "suspended", date_joined: "May 10, 2026", orders_count: 10, total_spent: 250.00, id: "834454-1", label: "Rowan Fox" },
+    { CustomerId: "834454", customerName: "Rowan Dox", customerEmail: "skylar.kai@example.com", status: "suspended", date_joined: "May 10, 2026", orders_count: 10, total_spent: 250.00, id: "834454-2", label: "Rowan Dox" },
+    { CustomerId: "834454", customerName: "Rowan Fox", customerEmail: "skylar.kai@example.com", status: "suspended", date_joined: "May 10, 2026", orders_count: 10, total_spent: 250.00, id: "834454-3", label: "Rowan Fox" },
+];
 
 // 4. Main Table Component
 export default function CustomerManagementTable() {
     const [statusFilter, setStatusFilter] = useState("all");
     const [sortBy, setSortBy] = useState("newest");
+    const [searchQuery, setSearchQuery] = useState("");
 
-    const data: Vendor[] = [
-        { CustomerId: "834759", customerName: "David John", customerEmail: "david.john@example.com", status: "active", date_joined: "May 10, 2026", orders_count: 10, total_spent: 100.00 },
-        { CustomerId: "834754", customerName: "David John", customerEmail: "david.john@example.com", status: "reported", date_joined: "May 10, 2026", orders_count: 10, total_spent: 140.00 },
-        { CustomerId: "834454", customerName: "Rowan Fox", customerEmail: "skylar.kai@example.com", status: "suspended", date_joined: "May 10, 2026", orders_count: 10, total_spent: 250.00 },
-        { CustomerId: "834454", customerName: "Rowan Dox", customerEmail: "skylar.kai@example.com", status: "suspended", date_joined: "May 10, 2026", orders_count: 10, total_spent: 250.00 },
-        { CustomerId: "834454", customerName: "Rowan Fox", customerEmail: "skylar.kai@example.com", status: "suspended", date_joined: "May 10, 2026", orders_count: 10, total_spent: 250.00 },
+    const filteredData = useMemo(() => {
+        let result = [...allCustomers];
 
-    ];
+        if (statusFilter !== "all") {
+            result = result.filter((c) => c.status === statusFilter);
+        }
+
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase();
+            result = result.filter(
+                (c) =>
+                    c.customerName.toLowerCase().includes(q) ||
+                    c.customerEmail.toLowerCase().includes(q) ||
+                    c.CustomerId.toLowerCase().includes(q)
+            );
+        }
+
+        if (sortBy === "oldest") {
+            result.reverse();
+        }
+
+        return result;
+    }, [statusFilter, sortBy, searchQuery]);
+
+    const handleSearch = (query: string): Promise<Vendor[]> => {
+        const q = query.toLowerCase().trim();
+        const results = !q
+            ? allCustomers
+            : allCustomers.filter(
+                (c) =>
+                    c.customerName.toLowerCase().includes(q) ||
+                    c.customerEmail.toLowerCase().includes(q) ||
+                    c.CustomerId.toLowerCase().includes(q)
+            );
+        return Promise.resolve(results);
+    };
+
+    const handleSelectCustomer = (customer: Vendor) => {
+        window.location.href = `/customers/${customer.CustomerId}`;
+    };
 
     return (
-        <div >
-            {/* Table Header with Search and Filters */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                {/* <div className="relative">
-            <Search className="absolute left-3 top-3 w-4 h-6 text-gray-400" />
-            <input 
-              placeholder="Search by name, email..." 
-              className=" border border-[#ECEFF3] px-4 py-3 pl-10 rounded-md outline-none w-68"
-            />
-          </div> */}
-
-
-            </div>
-
-            <div>
-                <TableToolBar searchPlaceholder="Search by name, email, or ID...">
-
-
+        <div>
+            <div className="border-x border-t rounded-t-2xl bg-white p-6">
+                <div className="flex flex-wrap justify-between items-center gap-4 w-full">
+                    <div className="flex-1 min-w-[200px] max-w-[320px]">
+                        <GenericSearch
+                            onSearch={handleSearch}
+                            onSelect={handleSelectCustomer}
+                            placeholder="Search by name, email, or ID..."
+                            minChars={1}
+                            debounceMs={300}
+                            size="sm"
+                            showIcon={true}
+                            showClear={true}
+                            showRecentSearches={false}
+                            onChange={(value) => setSearchQuery(value)}
+                            renderResult={(item: Vendor, query: string) => (
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <p className="text-sm font-medium text-[#1A1A2E]">{item.customerName}</p>
+                                        <p className="text-xs text-[#697586]">{item.customerEmail}</p>
+                                    </div>
+                                    <StatusBadge status={item.status} />
+                                </div>
+                            )}
+                        />
+                    </div>
 
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2">
@@ -156,8 +204,10 @@ export default function CustomerManagementTable() {
                             />
                         </div>
                     </div>
-                </TableToolBar>
-                <DataTable columns={getColumns()} data={data} />
+                </div>
+            </div>
+            <div>
+                <DataTable columns={getColumns()} data={filteredData} />
             </div>
         </div>
     );

@@ -185,19 +185,19 @@ function GenericSearchInner<T extends SearchResult>(
     >
       <div
         className={cn(
-          "search-input-wrapper",
           "flex items-center gap-1.5 p-2",
           "w-full",
-          "rounded-lg border",
+          "rounded-lg border border-[#DFE1E7]",
+          "bg-[#F6F8FA] shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]",
           "transition-all duration-150 ease-out",
           isFocused
-            ? "border-si-ring shadow-[0_0_0_3px_var(--si-ring-spread)] bg-si-bg"
-            : "border-si-border bg-si-bg",
+            ? "border-[#7C3AED] shadow-[0_0_0_3px_rgba(124,58,237,0.1)] bg-white"
+            : "",
           disabled && "opacity-50 cursor-not-allowed",
         )}
       >
         {showIcon && (
-          <span className="shrink-0 text-[--si-icon] transition-colors duration-150">
+          <span className="shrink-0 text-[#697586] transition-colors duration-150">
             {showLoadingIcon ? <LoadingSpinner /> : <SearchIcon />}
           </span>
         )}
@@ -223,8 +223,8 @@ function GenericSearchInner<T extends SearchResult>(
           }
           className={cn(
             "flex-1 min-w-0 bg-transparent outline-none",
-            "text-si-text placeholder:text-si-placeholder",
-            "text-lg font-normal",
+            "text-[#161618] placeholder:text-[#697586]",
+            "text-sm font-normal",
             "[&::-webkit-search-cancel-button]:hidden",
             inputSizeVariant[size],
             inputClassName,
@@ -240,10 +240,10 @@ function GenericSearchInner<T extends SearchResult>(
             className={cn(
               "shrink-0 flex items-center justify-center",
               "w-5 h-5 rounded-full",
-              "text-si-icon hover:text-si-text",
-              "hover:bg-si-clear-hover",
+              "text-[#697586] hover:text-[#161618]",
+              "hover:bg-[#ECEFF3]",
               "transition-colors duration-100",
-              "focus:outline-none focus-visible:ring-2 focus-visible:ring-si-ring",
+              "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C3AED]",
             )}
           >
             <ClearIcon />

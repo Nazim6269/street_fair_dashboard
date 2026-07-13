@@ -32,8 +32,10 @@ export function ResultItem<T extends SearchResult>({
         aria-selected={isActive}
         onMouseDown={handleMouseDown}
         className={cn(
-          "cursor-pointer select-none",
-          isActive && "bg-white/5",
+          "px-3 py-2.5 cursor-pointer select-none",
+          "transition-colors duration-75",
+          isActive && "bg-[#F3F0FF]",
+          !isActive && "hover:bg-[#F6F8FA]",
         )}
       >
         {renderResult(item, query)}
@@ -51,7 +53,7 @@ export function ResultItem<T extends SearchResult>({
         "flex items-center gap-3 px-3 py-2.5",
         "cursor-pointer select-none",
         "transition-colors duration-75",
-        isActive ? "bg-white/5" : "hover:bg-white/5",
+        isActive ? "bg-[#F3F0FF]" : "hover:bg-[#F6F8FA]",
       )}
     >
       {/* {item.icon && (
@@ -60,7 +62,7 @@ export function ResultItem<T extends SearchResult>({
         </span>
       )} */}
       <div className="min-w-0 flex-1">
-        <div className="text-[14px] text-gray96 truncate leading-snug">
+        <div className="text-[14px] text-[#161618] truncate leading-snug">
           {item.label}
         </div>
         {/* {item.description && (

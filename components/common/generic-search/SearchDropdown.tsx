@@ -34,7 +34,7 @@ export function SearchDropdown<T extends SearchResult>({
       return renderLoading ? (
         renderLoading()
       ) : (
-        <div className="px-4 py-6 flex items-center justify-center gap-2 text-cyan4A7A74 text-sm">
+        <div className="px-4 py-6 flex items-center justify-center gap-2 text-[#697586] text-sm">
           <span
             className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"
             aria-hidden
@@ -48,7 +48,7 @@ export function SearchDropdown<T extends SearchResult>({
       return renderError ? (
         renderError(error)
       ) : (
-        <div className="px-4 py-5 text-red60 text-sm flex items-start gap-2">
+        <div className="px-4 py-5 text-red-600 text-sm flex items-start gap-2">
           <span aria-hidden className="mt-0.5 text-base leading-none">
             ⚠
           </span>
@@ -74,7 +74,7 @@ export function SearchDropdown<T extends SearchResult>({
       let flatIndex = 0;
       return Array.from(grouped.entries()).map(([group, groupItems]) => (
         <div key={group} role="group" aria-label={group}>
-          <div className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-widest text-cyan4A7A74">
+          <div className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-widest text-[#697586]">
             {group}
           </div>
           {groupItems.map((item) => {
@@ -128,7 +128,7 @@ export function SearchDropdown<T extends SearchResult>({
       aria-label="Search results"
       className={cn(
         "absolute top-full left-0 right-0 z-50 mt-1.5",
-        "bg-blue8 border border-borderColor/20",
+        "bg-white border border-[#DFE1E7]",
         "rounded-xl shadow-lg overflow-hidden",
         "max-h-80 overflow-y-auto",
         "animate-in fade-in-0 slide-in-from-top-1 duration-100",
