@@ -9,6 +9,7 @@ import { Form } from "@/components/form/Form";
 import { useRouter } from "next/navigation";
 import GenericInput from "@/components/common/generic-input/GenericInput";
 import GenericButton from "@/components/common/generic-button/GenericButton";
+import { SITE_NAME } from "@/lib/constants";
 
 
 const setPasswordSchema = z.object({
@@ -100,7 +101,7 @@ export default function SetPasswordForm() {
     return (
         <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
             <div className="flex flex-col gap-8 w-full">
-                <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">StreetFood</h1>
+                <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">{SITE_NAME}</h1>
                 <p className="text-[#697586] text-sm -mt-4 text-center">Create a new password for your account</p>
 
                 <Form<SetPasswordFormValues>

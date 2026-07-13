@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { SelectOption } from "../ui/GenericDropdown";
+import { SelectOption } from "../components/common/generic-dropdown/GenericDropdown";
 
 const useSelect = (options:SelectOption[]) => {
   const [searchQuery, setSearchQuery] = useState("");

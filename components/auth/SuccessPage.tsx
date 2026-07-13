@@ -1,12 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import GenericButton from '@/components/common/generic-button/GenericButton'
+import { SITE_NAME } from '@/lib/constants'
 
 export default function SuccessPage() {
   return (
     <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
       <div className="flex flex-col items-center gap-6">
-        <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">StreetFood</h1>
+        <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">{SITE_NAME}</h1>
 
         <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#4C1D95] to-[#7C3AED] flex items-center justify-center">
           <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

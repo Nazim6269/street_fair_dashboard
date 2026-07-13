@@ -1,10 +1,11 @@
 import LoginForm from "@/components/auth/LoginForm";
+import { SITE_NAME } from "@/lib/constants";
 
 export default function LoginPage() {
   return (
     <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
       <div className="flex flex-col gap-8 w-full">
-        <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">StreetFood</h1>
+        <h1 className="text-3xl font-bold text-[#4C1D95] font-[Lora] text-center">{SITE_NAME}</h1>
         <p className="text-[#697586] text-sm -mt-4 text-center">Log in as a Admin</p>
         
         <div className="rounded-xl bg-purple-50 border border-purple-200 p-4 text-center">

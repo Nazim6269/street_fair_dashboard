@@ -1,4 +1,5 @@
 import { ChevronLeft, X } from 'lucide-react';
+import { SITE_NAME } from '@/lib/constants';
 
 interface SidebarHeaderProps {
   collapsed: boolean;
@@ -18,7 +19,7 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({
   return (
     <div className={`pt-10 pb-6 flex items-center justify-between ${collapsed ? 'px-3' : 'px-6'} shrink-0`}>
       {!collapsed && (
-        <h1 className="text-xl font-bold text-[#4C1D95] font-[Lora]">StreetFood</h1>
+        <h1 className="text-xl font-bold text-[#4C1D95] font-[Lora]">{SITE_NAME}</h1>
       )}
 
       {isMobile && onClose && (

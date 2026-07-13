@@ -6,46 +6,36 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import ViewDoc from "@/app/(dashboard)/vendors/verification/[rid]/_components/ViewDoc";
 import GenericDropDown from "@/components/common/generic-dropdown/GenericDropdown";
-
-
-// 1. Define the Vendor type based on your data structure
-type Document = {
-    id: string;
-    documents: string;
-    status: string;
-    uploaded_at: string;
-    expiry_date: string;
-
-};
+import { DocumentItem } from "@/types/vendor.types";
 
 
 
 // 2. Define the columns configuration
-const getColumns = (handleView: (document: Document) => void): Column<Document>[] => [
+const getColumns = (handleView: (document: DocumentItem) => void): Column<DocumentItem>[] => [
     {
-        header: "Serial #", accessor: "id",
+        header: "Serial #", accessor: "serial",
         cell: (row) => (
-            <div className="self-stretch text-[#697586] text-sm font-medium leading-[150%] tracking-[-0.28px]">{row.id}</div>
+            <div className="self-stretch text-[#697586] text-sm font-medium leading-[150%] tracking-[-0.28px]">{row.serial}</div>
         )
     },
     {
-        header: "Document Type", accessor: "documents",
+        header: "Document Type", accessor: "label",
         cell: (row) => (
-            <div className="self-stretch text-[#161618] text-sm font-medium leading-[150%] tracking-[-0.28px]">{row.documents}</div>
+            <div className="self-stretch text-[#161618] text-sm font-medium leading-[150%] tracking-[-0.28px]">{row.label}</div>
         )
     },
     {
         header: "Status",
         cell: (row) => (
             <div className="flex ">
-                    <span className={`flex justify-center items-center gap-2.5 ${row.status === "active" ? "bg-[#1A9844]" : "bg-[#D92D20]"} px-4 py-2 rounded-lg text-white text-sm font-medium leading-[120%]`}>
-                        {row.status === "active" ? "ACTIVE" : "INACTIVE"}
+                    <span className={`flex justify-center items-center gap-2.5 ${row.status === "ACTIVE" ? "bg-[#1A9844]" : "bg-[#D92D20]"} px-4 py-2 rounded-lg text-white text-sm font-medium leading-[120%]`}>
+                        {row.status === "ACTIVE" ? "ACTIVE" : "INACTIVE"}
                     </span>
             </div>
         ),
     },
-    { header: "Uploaded At", accessor: "uploaded_at" },
-    { header: "Expiration Date", accessor: "expiry_date" },
+    { header: "Type", accessor: "type" },
+    { header: "File Name", accessor: "fileName" },
     {
         header: "Action",
         cell: (row) => (
@@ -61,22 +51,23 @@ const getColumns = (handleView: (document: Document) => void): Column<Document>[
 
 
 // Dummy data
-const data: Document[] = [
+const data: DocumentItem[] = [
     {
-        id: "834759",
-        documents: "Business License",
-        status: "active",
-        expiry_date: "May 10, 2026",
-        uploaded_at: "May 10, 2026",
+        serial: "834759",
+        type: "BUSINESS_LICENSE",
+        label: "Business License",
+        fileName: "business_license.pdf",
+        fileUrl: "",
+        status: "ACTIVE",
     },
     {
-        id: "834758",
-        documents: "Business License",
-        status: "pending",
-        expiry_date: "May 10, 2026",
-        uploaded_at: "May 10, 2026",
+        serial: "834758",
+        type: "BUSINESS_LICENSE",
+        label: "Business License",
+        fileName: "business_license_2.pdf",
+        fileUrl: "",
+        status: "INACTIVE",
     },
-    // ... add more items
 ];
 
 
@@ -87,10 +78,10 @@ const data: Document[] = [
 
 // 3. Usage in your Page
 export default function DocumentInfoTable() {
-    const [view, setView] = useState<Document | null>(null);
+    const [view, setView] = useState<DocumentItem | null>(null);
     const [sortBy, setSortBy] = useState("newest");
 
-    const handleView = (document: Document) => {
+    const handleView = (document: DocumentItem) => {
         setView(document);
     };
 
@@ -134,7 +125,7 @@ export default function DocumentInfoTable() {
                 className="p-0"
                 showCloseButton={false}
             >
-                <ViewDoc onClose={() => setView(null)} />
+                <ViewDoc document={view!} onClose={() => setView(null)} />
             </CustomModal>
         </div >
     );

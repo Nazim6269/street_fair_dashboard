@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import useSelect from "../../../hooks/useSelect";
 import { selectTokens } from "./dropdown.variant";
-import {useClickOutside} from "../../../hooks/useClickOutside.ts"
+import {useClickOutside} from "../../../hooks/useClickOutside"
 
 function cn(...classes: (string | false | null | undefined)[]) {
   return classes.filter(Boolean).join(" ");

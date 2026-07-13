@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Lora, Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -16,8 +17,8 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "StreetFood",
-  description: "StreetFood Dashboard",
+  title: SITE_NAME,
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({
